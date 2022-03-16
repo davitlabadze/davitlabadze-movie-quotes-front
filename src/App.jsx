@@ -6,8 +6,8 @@ import AdminPanel from './layouts/AdminPanel';
 function App() {
   return (
     <div>
-      {/* <FrontendLayout /> */}
-      <AdminPanel />
+      <FrontendLayout />
+      {/* <AdminPanel /> */}
     </div>
   );
 }

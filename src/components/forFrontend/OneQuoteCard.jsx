@@ -39,7 +39,7 @@ function OneQuoteCard() {
             </h1>
             <div className='py-2 text-center text-white'>
               <a href='#' className='font-sans text-5xl underline'>
-                {quote.category.movie[lang]}
+                {quote.movie.movie[lang]}
               </a>
             </div>
           </div>
