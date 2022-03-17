@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function OneQuoteCard() {
   const [quote, setQuote] = useState();
@@ -38,9 +39,12 @@ function OneQuoteCard() {
               {quote.quote[lang]}
             </h1>
             <div className='py-2 text-center text-white'>
-              <a href='#' className='font-sans text-5xl underline'>
+              <Link
+                to={`/movie-quotes/${quote.movie_id}`}
+                className='font-sans text-5xl underline'
+              >
                 {quote.movie.movie[lang]}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -50,7 +54,9 @@ function OneQuoteCard() {
           No posts have been added yet
         </h1>
       )}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && (
+        <h1 className='text-5xl text-center text-white py-96'>Loading...</h1>
+      )}
     </Fragment>
   );
 }

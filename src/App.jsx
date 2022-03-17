@@ -2,12 +2,15 @@ import React from 'react';
 import './App.css';
 import FrontendLayout from './layouts/FrontendLayout';
 import AdminPanel from './layouts/AdminPanel';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <FrontendLayout />
-      {/* <AdminPanel /> */}
+      <Routes>
+        <Route path='*' element={<FrontendLayout to='/quote' />} />
+        <Route path='/adminpanle' element={<AdminPanel />} />
+      </Routes>
     </div>
   );
 }

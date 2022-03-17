@@ -2,10 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import Header from './Header';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Card() {
   const [quotes, setQuotes] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
+
   useEffect(() => {
     getMovieQuotes();
   }, []);
@@ -13,7 +16,7 @@ function Card() {
   const getMovieQuotes = () => {
     setIsLoading(true);
     axios
-      .get('get-quotes/2')
+      .get(`get-quotes/${params.movieId}`)
       .then((res) => {
         setQuotes(res.data);
         console.log(res.data);
@@ -46,7 +49,9 @@ function Card() {
           </div>
         </div>
       )}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && (
+        <h1 className='text-5xl text-center text-white py-96'>Loading...</h1>
+      )}
     </Fragment>
   );
 }
