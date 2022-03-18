@@ -5,6 +5,7 @@ import AllQuotesCard from '../components/forFrontend/AllQuotesCard';
 import OneQuoteCard from '../components/forFrontend/OneQuoteCard';
 import Login from '../auth/Login';
 import { Routes, Route } from 'react-router-dom';
+import AdminPanel from './AdminPanel';
 
 function FrontendLayout() {
   return (

@@ -6,6 +6,8 @@ import Movies from '../img/movies.svg';
 import Quotes from '../img/quotes.svg';
 import Logout from '../img/logout.svg';
 import Dashboard from '../adminPanel/Dashboard';
+import Movie from '../adminPanel/movie/Index';
+import { Link, Route, Routes } from 'react-router-dom';
 
 function AdminPanel() {
   return (
@@ -20,8 +22,8 @@ function AdminPanel() {
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 CORE
               </div>
-              <a
-                href='dashboard'
+              <Link
+                to='/adminpanel/dashboard'
                 className='flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
               >
                 <img
@@ -30,7 +32,7 @@ function AdminPanel() {
                   alt='home'
                 />
                 Dashboard
-              </a>
+              </Link>
               <a
                 href='home'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
@@ -46,8 +48,8 @@ function AdminPanel() {
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 INTERFACE
               </div>
-              <a
-                href="{{ route('movies.index') }}"
+              <Link
+                to='movies'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img
@@ -56,7 +58,8 @@ function AdminPanel() {
                   alt='movies'
                 />
                 Movies
-              </a>
+              </Link>
+
               <a
                 href='quotes.index'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
@@ -72,20 +75,20 @@ function AdminPanel() {
           </div>
         </div>
       </div>
-      <div class='flex flex-col md:pl-64'>
-        <div class='sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow'>
-          <div class='flex justify-between flex-1 px-4'>
-            <div class='flex flex-1 mt-4'>Dashboard</div>
-            <div class='flex items-center ml-4 md:ml-6'>
-              <div class='relative ml-3'>
+      <div className='flex flex-col md:pl-64'>
+        <div className='sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow'>
+          <div className='flex justify-between flex-1 px-4'>
+            <div className='flex flex-1 mt-4'>Dashboard</div>
+            <div className='flex items-center ml-4 md:ml-6'>
+              <div className='relative ml-3'>
                 <div>
                   <a
                     href='logout'
-                    class='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                    className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
                   >
                     <img
                       src={Logout}
-                      class='flex-shrink-0 w-6 h-6 text-gray-500'
+                      className='flex-shrink-0 w-6 h-6 text-gray-500'
                       alt='logout'
                     />
                     Log Out
@@ -95,9 +98,13 @@ function AdminPanel() {
             </div>
           </div>
         </div>
-        <main class='w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl'>
-          <div class='w-full'>
-            <Dashboard />
+        <main className='w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl'>
+          <div className='w-full'>
+            {/* <Dashboard /> */}
+            <Routes>
+              <Route path='dashboard' element={<Dashboard />} />
+              <Route path='movies' element={<Movie />} />
+            </Routes>
           </div>
         </main>
       </div>
