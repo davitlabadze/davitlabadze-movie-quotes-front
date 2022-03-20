@@ -7,6 +7,7 @@ import Quotes from '../img/quotes.svg';
 import Logout from '../img/logout.svg';
 import Dashboard from '../adminPanel/Dashboard';
 import Movie from '../adminPanel/movie/Index';
+import Create from '../adminPanel/movie/Create';
 import { Link, Route, Routes } from 'react-router-dom';
 
 function AdminPanel() {
@@ -23,7 +24,7 @@ function AdminPanel() {
                 CORE
               </div>
               <Link
-                to='/adminpanel/dashboard'
+                to='dashboard'
                 className='flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
               >
                 <img
@@ -100,10 +101,10 @@ function AdminPanel() {
         </div>
         <main className='w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl'>
           <div className='w-full'>
-            {/* <Dashboard /> */}
             <Routes>
               <Route path='dashboard' element={<Dashboard />} />
-              <Route path='movies' element={<Movie />} />
+              <Route path='movies' element={<Movie />}></Route>
+              <Route path='movies/create-data' element={<Create />} />
             </Routes>
           </div>
         </main>

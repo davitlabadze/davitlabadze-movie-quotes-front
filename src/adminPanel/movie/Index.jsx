@@ -5,6 +5,7 @@ import Plus from '../../img/plus.svg';
 import Pen from '../../img/pen.svg';
 import Delete from '../../img/delete.svg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Index() {
   const [movies, setMovies] = useState();
@@ -42,37 +43,41 @@ function Index() {
             </p>
             <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
               <img src={Plus} className='w-6 h-6' alt='plus' />
-              <a href="{{ route('movies.create') }}">Create Data</a>
+
+              <Link to='create-data'>Create Data</Link>
             </button>
           </div>
           <table className='min-w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
-              <th
-                scope='col'
-                className='px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-              >
-                Id
-              </th>
-              <th
-                scope='col'
-                className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-              >
-                Movie_en
-              </th>
-              <th
-                scope='col'
-                className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-              >
-                Movie_ka
-              </th>
-              <th
-                scope='col'
-                colSpan='2'
-                className='px-2 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase '
-              >
-                <span className=''>Action</span>
-              </th>
+              <tr>
+                <th
+                  scope='col'
+                  className='px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                >
+                  Id
+                </th>
+                <th
+                  scope='col'
+                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                >
+                  Movie_en
+                </th>
+                <th
+                  scope='col'
+                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                >
+                  Movie_ka
+                </th>
+                <th
+                  scope='col'
+                  colSpan='2'
+                  className='px-2 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase '
+                >
+                  <span className=''>Action</span>
+                </th>
+              </tr>
             </thead>
+
             <tbody>
               {movies.data.map((movie) => (
                 <tr className='bg-white' key={movie.id}>
