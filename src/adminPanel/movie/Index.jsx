@@ -28,6 +28,18 @@ function Index() {
     setIsLoading(false);
   };
 
+  const deleteMovie = (id) => {
+    axios
+      .delete(`movies/${id}`)
+      .then((res) => {
+        console.log(res);
+        getMovies();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Fragment>
       {!isLoading && movies && (
@@ -99,11 +111,9 @@ function Index() {
                     </form>
                   </td>
                   <td className='text-sm font-medium text-center whitespace-nowrap'>
-                    <form action='#' method='POST'>
-                      <button>
-                        <img src={Delete} className='w-6 h-6' alt='delete' />
-                      </button>
-                    </form>
+                    <button onClick={() => deleteMovie(movie.id)}>
+                      <img src={Delete} className='w-6 h-6' alt='delete' />
+                    </button>
                   </td>
                 </tr>
               ))}
