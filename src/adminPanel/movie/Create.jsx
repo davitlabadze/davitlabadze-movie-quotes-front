@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Create() {
   const [movieEn, setMovieEn] = useState('');
@@ -48,7 +49,7 @@ function Create() {
         </p>
         <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
           <img className='w-6 h-6' src={Eye} alt='eye' />
-          <a href='movie.index'>All Data</a>
+          <Link to={'/adminpanel/movies'}>All Data</Link>
         </button>
       </div>
       <form className='mt-10'>
