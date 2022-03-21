@@ -104,11 +104,11 @@ function Index() {
                   </td>
 
                   <td className='text-sm font-medium text-right whitespace-nowrap'>
-                    <form action='#'>
+                    <Link to={`/adminpanel/movies/${movie.id}/edit`}>
                       <button>
                         <img src={Pen} className='w-6 h-6' alt='edit-pen' />
                       </button>
-                    </form>
+                    </Link>
                   </td>
                   <td className='text-sm font-medium text-center whitespace-nowrap'>
                     <button onClick={() => deleteMovie(movie.id)}>
