@@ -17,7 +17,13 @@ function Index() {
   const getMovies = () => {
     setIsLoading(true);
     axios
-      .get('movies')
+      .get('movies', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         setMovies(res.data);
         console.log(res.data);

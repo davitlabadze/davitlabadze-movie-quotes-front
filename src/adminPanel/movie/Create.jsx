@@ -35,7 +35,13 @@ function Create() {
     }
 
     axios
-      .post('movies/create', formData)
+      .post('movies/create', formData, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        withCredentials: true,
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
