@@ -7,7 +7,10 @@ import Quotes from '../img/quotes.svg';
 import Logout from '../img/logout.svg';
 import Dashboard from '../adminPanel/Dashboard';
 import Movie from '../adminPanel/movie/Index';
+import Quote from '../adminPanel/quote/Index';
 import Create from '../adminPanel/movie/Create';
+import Update from '../adminPanel/movie/Update';
+import CreateQuote from '../adminPanel/quote/Create';
 import { Link, Route, Routes } from 'react-router-dom';
 
 function AdminPanel() {
@@ -61,8 +64,8 @@ function AdminPanel() {
                 Movies
               </Link>
 
-              <a
-                href='quotes.index'
+              <Link
+                to='quotes'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img
@@ -71,7 +74,7 @@ function AdminPanel() {
                   alt='quotes'
                 />
                 Quotes
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
@@ -105,6 +108,9 @@ function AdminPanel() {
               <Route path='dashboard' element={<Dashboard />} />
               <Route path='movies' element={<Movie />}></Route>
               <Route path='movies/create-data' element={<Create />} />
+              <Route path='movies/:movieId/edit' element={<Update />} />
+              <Route path='quotes' element={<Quote />}></Route>
+              <Route path='quotes/create-quote' element={<CreateQuote />} />
             </Routes>
           </div>
         </main>

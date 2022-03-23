@@ -5,10 +5,10 @@ import Plus from '../../img/plus.svg';
 import Pen from '../../img/pen.svg';
 import Delete from '../../img/delete.svg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Index() {
   const [quotes, setQuotes] = useState();
-  const [thumbnail, setThumbnail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -21,8 +21,6 @@ function Index() {
       .get('quotes')
       .then((res) => {
         setQuotes(res.data);
-        setThumbnail(res.data.thumbnail);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +43,7 @@ function Index() {
             </p>
             <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
               <img src={Plus} className='w-6 h-6' alt='plus' />
-              <a href='quotes.create'>Create Data</a>
+              <Link to='create-quote'>Create Quote</Link>
             </button>
           </div>
           <table className='min-w-full divide-y divide-gray-200'>
@@ -98,15 +96,15 @@ function Index() {
             </thead>
             <tbody>
               {quotes.data.map((quote) => (
-                <tr className='bg-white'>
+                <tr className='bg-white' key={quote.id}>
                   <td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
                     {quote.id}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-                    {quote.movie.en}
+                    {quote.movie.movie.en}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-                    {quote.movie.ka}
+                    {quote.movie.movie.ka}
                   </td>
                   <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
                     {quote.quote.en}
@@ -116,7 +114,8 @@ function Index() {
                   </td>
                   <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
                     <img
-                      src={`http://localhost:8000/storage/${thumbnail}`}
+                      key={quote.id}
+                      src={`http://localhost:8000/storage/${quote.thumbnail}`}
                       width='64'
                       height='64'
                       alt='movie img'
