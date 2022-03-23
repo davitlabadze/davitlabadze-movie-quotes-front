@@ -1,32 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BackButton from '../components/forFrontend/BackButton';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 function Login() {
-  const [login, setLogin] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    axios
-      .post('login')
-      .then((res) => {
-        setLogin(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  console.log(login);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    axios
+      .post('login', {
+        email: data.email,
+        password: data.password,
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -47,25 +45,13 @@ function Login() {
                 type='email'
                 name='email'
                 id='email'
-                // defaultValue='test@test.com'
-                {...register('email', {
-                  required: true,
-                  validate: {
-                    positive: (v) =>
-                      parseInt(v) > 0 || 'should be greater than 0',
-                    lessThanTen: (v) =>
-                      parseInt(v) < 10 || 'should be lower than 10',
-                    // you can do asynchronous validation as well
-                    checkUrl: async () =>
-                      (await fetch('/login')) || 'error message', // JS only: <p>error message</p> TS only support string
-                    messages: (v) => !v && 'email',
-                  },
-                })}
+                {...register('email', { required: 'Value is field' })}
               />
-              {/* <ErrorMessage errors={errors} name='singleErrorInput' /> */}
-              {/* {errors.exampleRequired && (
-                <span className='mt-2 text-xs text-red-500'>shecdoma</span>
-              )} */}
+              {errors.email && (
+                <span className='mt-2 text-xs text-red-500'>
+                  {errors.email.message}
+                </span>
+              )}
             </div>
             <div className='mb-6'>
               <label
@@ -79,10 +65,13 @@ function Login() {
                 type='password'
                 name='password'
                 id='password'
-                // defaultValue=''
-                {...register('password', { required: true })}
+                {...register('password', { required: 'Value is field' })}
               />
-              {errors.message && errors.message.message}
+              {errors.password && (
+                <span className='mt-2 text-xs text-red-500'>
+                  {errors.password.message}
+                </span>
+              )}
             </div>
             <div className='mb-6'>
               <button
