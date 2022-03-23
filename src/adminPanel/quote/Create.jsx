@@ -13,9 +13,6 @@ function Create() {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = (data) => alert(JSON.stringify(data.picture));
-  // const onSubmit = (data) => console.log(data);
-
   const [movies, setMovie] = useState([]);
 
   useEffect(() => {
@@ -27,17 +24,11 @@ function Create() {
       .get(`quotes/create`)
       .then((res) => {
         setMovie(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-    // const storageRef = app.storage().ref();
-    // const fileRef = storageRef
-    //   .child(data.image[0].name)
-    //   .foleRef.put(data.image[0]);
     const formData = new FormData();
     formData.append('quote-en', data.quoteEn);
     formData.append('quote-ka', data.quoteKa);
@@ -49,12 +40,8 @@ function Create() {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-        // 'quote-en': data.quoteEn,
-        // 'quote-ka': data.quoteKa,
-        // 'movie-id': data.movieId,
-        // thumbnail: data.image[0].name,
       })
-      .then((res) => console.log(res), console.log(movies))
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
