@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import axios from 'axios';
