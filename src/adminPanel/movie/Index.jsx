@@ -36,7 +36,14 @@ function Index() {
 
   const deleteMovie = (id) => {
     axios
-      .delete(`movies/${id}`)
+      .delete(`movies/${id}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res);
         getMovies();
