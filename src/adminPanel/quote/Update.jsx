@@ -27,7 +27,12 @@ function Update() {
   const getEditQuote = () => {
     setIsLoading(true);
     axios
-      .get(`quotes/${params.quoteId}/edit`)
+      .get(`quotes/${params.quoteId}/edit`, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      })
       .then((res) => {
         setEditQuote(res.data);
         setID(res.data.quote.id);
@@ -51,7 +56,10 @@ function Update() {
       .put(`quotes/${id}/edit`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
+        withCredentials: true,
       })
       .then((res) => {
         console.log(res.data);
@@ -79,7 +87,6 @@ function Update() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            method='POST'
             className='mt-10'
             encType='multipart/form-data'
           >

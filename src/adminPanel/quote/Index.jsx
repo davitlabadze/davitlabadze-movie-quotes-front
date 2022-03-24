@@ -23,6 +23,7 @@ function Index() {
           Accept: 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
+        withCredentials: true,
       })
       .then((res) => {
         setQuotes(res.data);
