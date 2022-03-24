@@ -18,7 +18,12 @@ function Index() {
   const getQuotes = () => {
     setIsLoading(true);
     axios
-      .get('quotes')
+      .get('quotes', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      })
       .then((res) => {
         setQuotes(res.data);
       })
@@ -122,11 +127,11 @@ function Index() {
                     />
                   </td>
                   <td className='text-sm font-medium text-right whitespace-nowrap'>
-                    <form action="{{ route('quotes.edit',['quote'=>$post->id])}}">
+                    <Link to={`/adminpanel/quotes/${quote.id}/edit`}>
                       <button>
                         <img src={Pen} className='w-6 h-6' alt='edit-pen' />
                       </button>
-                    </form>
+                    </Link>
                   </td>
                   <td className='text-sm font-medium text-center whitespace-nowrap'>
                     <form action='quotes.destroy' method='POST'>

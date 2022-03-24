@@ -11,6 +11,7 @@ import Quote from '../adminPanel/quote/Index';
 import Create from '../adminPanel/movie/Create';
 import Update from '../adminPanel/movie/Update';
 import CreateQuote from '../adminPanel/quote/Create';
+import UpdateQuote from '../adminPanel/quote/Update';
 import { Link, Route, Routes } from 'react-router-dom';
 
 function AdminPanel() {
@@ -111,6 +112,7 @@ function AdminPanel() {
               <Route path='movies/:movieId/edit' element={<Update />} />
               <Route path='quotes' element={<Quote />}></Route>
               <Route path='quotes/create-quote' element={<CreateQuote />} />
+              <Route path='quotes/:quoteId/edit' element={<UpdateQuote />} />
             </Routes>
           </div>
         </main>
