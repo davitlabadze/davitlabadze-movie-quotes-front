@@ -2,8 +2,10 @@ import React from 'react';
 import BackButton from '../components/forFrontend/BackButton';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,10 +18,10 @@ function Login() {
         email: data.email,
         password: data.password,
       })
-
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem('token', res.data.token);
+        console.log(res.data);
+        navigate('/adminpanel/dashboard', { replace: true });
       })
       .catch((err) => {
         console.log(err);
