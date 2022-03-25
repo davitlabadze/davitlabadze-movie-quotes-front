@@ -33,6 +33,24 @@ function Index() {
       });
     setIsLoading(false);
   };
+  const deleteQuote = (id) => {
+    axios
+      .delete(`quotes/${id}`, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+        getQuotes();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Fragment>
@@ -135,11 +153,9 @@ function Index() {
                     </Link>
                   </td>
                   <td className='text-sm font-medium text-center whitespace-nowrap'>
-                    <form action='quotes.destroy' method='POST'>
-                      <button>
-                        <img src={Delete} className='w-6 h-6' alt='delete' />
-                      </button>
-                    </form>
+                    <button onClick={() => deleteQuote(quote.id)}>
+                      <img src={Delete} className='w-6 h-6' alt='delete' />
+                    </button>
                   </td>
                 </tr>
               ))}
