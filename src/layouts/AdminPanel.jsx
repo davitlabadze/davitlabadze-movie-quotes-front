@@ -23,7 +23,7 @@ function AdminPanel() {
       .post('logout')
       .then((res) => {
         if (res.data.status === 200) {
-          localStorage.removeItem('token', res.data.token);
+          localStorage.removeItem('token');
           navigate('/', { replace: true });
         }
       })
