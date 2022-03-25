@@ -12,9 +12,23 @@ import Create from '../adminPanel/movie/Create';
 import Update from '../adminPanel/movie/Update';
 import CreateQuote from '../adminPanel/quote/Create';
 import UpdateQuote from '../adminPanel/quote/Update';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function AdminPanel() {
+  const navigate = useNavigate();
+  const logoutSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post('logout')
+      .then((res) => {
+        if (res.data.status === 200) {
+          localStorage.removeItem('token', res.data.token);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className='hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
@@ -87,9 +101,10 @@ function AdminPanel() {
             <div className='flex items-center ml-4 md:ml-6'>
               <div className='relative ml-3'>
                 <div>
-                  <a
-                    href='logout'
+                  <button
+                    type='button'
                     className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                    onClick={logoutSubmit}
                   >
                     <img
                       src={Logout}
@@ -97,7 +112,7 @@ function AdminPanel() {
                       alt='logout'
                     />
                     Log Out
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
