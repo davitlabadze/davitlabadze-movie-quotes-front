@@ -18,13 +18,7 @@ function Index() {
   const getQuotes = () => {
     setIsLoading(true);
     axios
-      .get('quotes', {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .get('quotes')
       .then((res) => {
         setQuotes(res.data);
       })
@@ -35,14 +29,7 @@ function Index() {
   };
   const deleteQuote = (id) => {
     axios
-      .delete(`quotes/${id}`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .delete(`quotes/${id}`)
       .then((res) => {
         console.log(res);
         getQuotes();

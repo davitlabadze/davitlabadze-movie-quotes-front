@@ -21,14 +21,7 @@ function Create() {
 
   const getMovie = () => {
     axios
-      .get(`quotes/create`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .get(`quotes/create`)
       .then((res) => {
         setMovie(res.data);
       })
@@ -43,14 +36,7 @@ function Create() {
     formData.append('thumbnail', data.image[0]);
 
     axios
-      .post('quotes/create', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .post('quotes/create', formData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

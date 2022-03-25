@@ -17,13 +17,7 @@ function Index() {
   const getMovies = () => {
     setIsLoading(true);
     axios
-      .get('movies', {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .get('movies')
       .then((res) => {
         setMovies(res.data);
         console.log(res.data);
@@ -36,14 +30,7 @@ function Index() {
 
   const deleteMovie = (id) => {
     axios
-      .delete(`movies/${id}`, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .delete(`movies/${id}`)
       .then((res) => {
         console.log(res);
         getMovies();

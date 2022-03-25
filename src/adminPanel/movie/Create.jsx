@@ -17,13 +17,7 @@ function Create() {
     formData.append('movie-ka', data.movieKa);
 
     axios
-      .post('movies/create', formData, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .post('movies/create', formData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

@@ -27,12 +27,7 @@ function Update() {
   const getEditQuote = () => {
     setIsLoading(true);
     axios
-      .get(`quotes/${params.quoteId}/edit`, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
+      .get(`quotes/${params.quoteId}/edit`)
       .then((res) => {
         setEditQuote(res.data);
         setID(res.data.quote.id);
@@ -53,14 +48,7 @@ function Update() {
     formData.append('movie-id', data.movieId);
     formData.append('thumbnail', data.image[0]);
     axios
-      .put(`quotes/${id}/edit`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        withCredentials: true,
-      })
+      .put(`quotes/${id}/edit`, formData)
       .then((res) => {
         console.log(res.data);
       })

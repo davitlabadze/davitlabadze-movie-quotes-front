@@ -27,12 +27,7 @@ function Update() {
   const getEditMovie = () => {
     setIsLoading(true);
     axios
-      .get(`movies/${params.movieId}/edit`, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
+      .get(`movies/${params.movieId}/edit`)
       .then((res) => {
         setEditMovie(res.data);
         setID(res.data.id);
@@ -46,20 +41,10 @@ function Update() {
 
   const updateMovie = (data) => {
     axios
-      .put(
-        `movies/${id}/edit`,
-        {
-          'movie-en': data.movieEn,
-          'movie-ka': data.movieKa,
-        },
-        {
-          headers: {
-            Accept: 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-          withCredentials: true,
-        }
-      )
+      .put(`movies/${id}/edit`, {
+        'movie-en': data.movieEn,
+        'movie-ka': data.movieKa,
+      })
       .then((res) => {
         getEditMovie();
         console.log(res.data);
