@@ -27,8 +27,6 @@ function Dashboard() {
             quotes: res.data.quotes.data,
           };
         });
-
-        // setData(res.data.moviesCount);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
