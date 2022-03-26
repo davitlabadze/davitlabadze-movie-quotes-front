@@ -2,17 +2,11 @@ import React from 'react';
 
 import Home from '../img/home.svg';
 import Global from '../img/global.svg';
-import Movies from '../img/movies.svg';
-import Quotes from '../img/quotes.svg';
+import Movie from '../img/movies.svg';
+import Quote from '../img/quotes.svg';
 import Logout from '../img/logout.svg';
-import Dashboard from '../adminPanel/Dashboard';
-import Movie from '../adminPanel/movie/Index';
-import Quote from '../adminPanel/quote/Index';
-import Create from '../adminPanel/movie/Create';
-import Update from '../adminPanel/movie/Update';
-import CreateQuote from '../adminPanel/quote/Create';
-import UpdateQuote from '../adminPanel/quote/Update';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function AdminPanel() {
@@ -72,7 +66,7 @@ function AdminPanel() {
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img
-                  src={Movies}
+                  src={Movie}
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='movies'
                 />
@@ -84,7 +78,7 @@ function AdminPanel() {
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img
-                  src={Quotes}
+                  src={Quote}
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='quotes'
                 />
@@ -120,15 +114,7 @@ function AdminPanel() {
         </div>
         <main className='w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl'>
           <div className='w-full'>
-            <Routes>
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='movies' element={<Movie />}></Route>
-              <Route path='movies/create-data' element={<Create />} />
-              <Route path='movies/:movieId/edit' element={<Update />} />
-              <Route path='quotes' element={<Quote />}></Route>
-              <Route path='quotes/create-quote' element={<CreateQuote />} />
-              <Route path='quotes/:quoteId/edit' element={<UpdateQuote />} />
-            </Routes>
+            <Outlet />
           </div>
         </main>
       </div>
