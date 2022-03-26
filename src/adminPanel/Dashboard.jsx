@@ -1,9 +1,38 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Movies from '../img/movies.svg';
 import Quotes from '../img/quotes.svg';
 import Recent from '../img/recent.svg';
 
 function Dashboard() {
+  const [data, setData] = useState({
+    moviesCount: '',
+    quotesCount: '',
+    quotes: [],
+  });
+
+  useEffect(() => {
+    getDashboardData();
+  }, []);
+
+  const getDashboardData = () => {
+    axios
+      .get('dashboard')
+      .then((res) => {
+        setData((datas) => {
+          return {
+            ...datas,
+            moviesCount: res.data.moviesCount,
+            quotesCount: res.data.quotesCount,
+            quotes: res.data.quotes.data,
+          };
+        });
+
+        // setData(res.data.moviesCount);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-4'>
@@ -22,7 +51,7 @@ function Dashboard() {
             >
               <p className='text-sm font-medium text-white'>All Movies</p>
               <p className='text-sm text-white truncate'>
-                {/* total:{{ $moviesCount }} */} total: 5
+                total: {data.moviesCount}
               </p>
             </a>
           </div>
@@ -42,7 +71,7 @@ function Dashboard() {
             >
               <p className='text-sm font-medium text-white'>All Quotes</p>
               <p className='text-sm text-white truncate'>
-                {/* total:{{ $quotesCount }} */} total: 4
+                total: {data.quotesCount}
               </p>
             </a>
           </div>
@@ -94,32 +123,33 @@ function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          <tr className='bg-white'>
-            <td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
-              1
-            </td>
-            <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-              thor
-            </td>
-            <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-              თორი
-            </td>
-            {/* @endforeach */}
-            <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-              Of Course
-            </td>
-            <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
-              რათქმაუნდა
-            </td>
-            <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
-              <img
-                src='https://www.looper.com/img/gallery/the-real-reason-for-hemsworths-endgame-anger/intro-1571158290.jpg'
-                alt='img'
-                width='64'
-                height='64'
-              />
-            </td>
-          </tr>
+          {data.quotes.map((quote) => (
+            <tr className='bg-white' key={quote.id}>
+              <td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
+                {quote.id}
+              </td>
+              <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                {quote.movie.movie.en}
+              </td>
+              <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                {quote.movie.movie.ka}
+              </td>
+              <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                {quote.quote.en}
+              </td>
+              <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                {quote.quote.ka}
+              </td>
+              <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
+                <img
+                  src={`http://localhost:8000/storage/${quote.thumbnail}`}
+                  alt='img'
+                  width='64'
+                  height='64'
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div>here pagination 1 2 3</div>
