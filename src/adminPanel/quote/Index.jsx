@@ -6,8 +6,10 @@ import Pen from '../../img/pen.svg';
 import Delete from '../../img/delete.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Index() {
+  const { t } = useTranslation();
   const [quotes, setQuotes] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,11 +52,11 @@ function Index() {
                 src={Table}
                 alt='table'
               />
-              All Quotes
+              {t('All Quotes')}
             </p>
             <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
               <img src={Plus} className='w-6 h-6' alt='plus' />
-              <Link to='create-quote'>Create Quote</Link>
+              <Link to='create-quote'>{t('Add Quote')}</Link>
             </button>
           </div>
           <table className='min-w-full divide-y divide-gray-200'>
@@ -153,11 +155,13 @@ function Index() {
       )}
       {!isLoading && !quotes && (
         <h1 className='text-5xl text-center text-white py-96'>
-          No posts have been added yet
+          {t('No information available')}
         </h1>
       )}
       {isLoading && (
-        <h1 className='text-5xl text-center text-white py-96'>Loading...</h1>
+        <h1 className='text-5xl text-center text-white py-96'>
+          {t('Loading')}...
+        </h1>
       )}
     </Fragment>
   );

@@ -3,8 +3,12 @@ import Eye from '../../img/eye.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Create() {
+  const { t } = useTranslation();
+  const [message, setMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -17,9 +21,15 @@ function Create() {
     formData.append('movie-ka', data.movieKa);
 
     axios
-      .post('movies/create', formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .post('movies/creataasd', formData)
+      .then((res) => {
+        if (res.status === 200) {
+          setMessage('successfully');
+        } else {
+          setMessage('error');
+        }
+      })
+      .catch((err) => setMessage('error'));
   };
 
   return (
@@ -27,11 +37,11 @@ function Create() {
       <div className='flex p-2 mb-10 -mt-12'>
         <p className='flex p-2'>
           <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
-          Add Movie
+          {t('Add Movie')}
         </p>
         <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
           <img className='w-6 h-6' src={Eye} alt='eye' />
-          <Link to={'/adminpanel/movies'}>All Data</Link>
+          <Link to={'/adminpanel/movies'}>{t('All Movies')}</Link>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className='mt-10'>
@@ -53,7 +63,7 @@ function Create() {
           />
           {errors.movieEn && (
             <p className='mt-2 text-xs text-red-500'>
-              {errors.quoteEn.message}
+              {errors.movieEn.message}
             </p>
           )}
         </div>
@@ -76,7 +86,7 @@ function Create() {
           />
           {errors.movieKa && (
             <p className='mt-2 text-xs text-red-500'>
-              {errors.quoteKa.message}
+              {errors.movieKa.message}
             </p>
           )}
         </div>
@@ -86,8 +96,9 @@ function Create() {
             type='submit'
             className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
           >
-            Create
+            {t('Create')}
           </button>
+          {message}
         </div>
       </form>
     </div>

@@ -5,8 +5,11 @@ import { useForm } from 'react-hook-form';
 
 import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
+import { useTranslation } from 'react-i18next';
 
 function Update() {
+  const { t } = useTranslation();
+
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [editMovie, setEditMovie] = useState();
@@ -63,11 +66,11 @@ function Update() {
                 src={Table}
                 alt='table'
               />
-              Edit Movie
+              {t('Edit Movie')}
             </p>
             <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
               <img className='w-6 h-6' src={Eye} alt='eye' />
-              <Link to={'/adminpanel/movies'}>All Movies</Link>
+              <Link to={'/adminpanel/movies'}>{t('All Movies')}</Link>
             </button>
           </div>
           <form onSubmit={handleSubmit(updateMovie)} className='mt-10'>
@@ -124,7 +127,7 @@ function Update() {
                 type='submit'
                 className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
               >
-                Update
+                {t('Update')}
               </button>
             </div>
           </form>

@@ -5,8 +5,10 @@ import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Create() {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -46,11 +48,11 @@ function Create() {
       <div className='flex p-2 mb-10 -mt-12'>
         <p className='flex p-2'>
           <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
-          Add Quote
+          {t('Add Quote')}
         </p>
         <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
           <img className='w-6 h-6' src={Eye} alt='eye' />
-          <Link to='/adminpanel/quotes'>All Quotes</Link>
+          <Link to='/adminpanel/quotes'>{t('All Quotes')}</Link>
         </button>
       </div>
       <form
@@ -144,7 +146,7 @@ function Create() {
             type='submit'
             className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
           >
-            Create
+            {t('Create')}
           </button>
         </div>
       </form>

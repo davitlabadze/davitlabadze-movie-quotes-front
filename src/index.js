@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
+import './language/i18next';
 
 axios.defaults.baseURL = 'http://localhost:8000/api/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -17,12 +18,15 @@ axios.interceptors.request.use(function (config) {
   return config;
 });
 
+const loadingMarkup = <div className='text-4xl text-white'>Loading...</div>;
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Suspense fallback={loadingMarkup}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  </Suspense>,
   document.getElementById('root')
 );
 

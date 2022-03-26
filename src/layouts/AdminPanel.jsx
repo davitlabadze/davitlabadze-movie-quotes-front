@@ -8,8 +8,11 @@ import Logout from '../img/logout.svg';
 
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 function AdminPanel() {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const logoutSubmit = (e) => {
     e.preventDefault();
@@ -28,12 +31,12 @@ function AdminPanel() {
       <div className='hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
         <div className='flex flex-col flex-1 min-h-0 bg-gray-800'>
           <div className='flex items-center flex-shrink-0 h-16 px-4 bg-gray-900'>
-            <h1 className='text-xl font-bold text-white'>Adminpanel</h1>
+            <h1 className='text-xl font-bold text-white'>{t('Adminpanel')}</h1>
           </div>
           <div className='flex flex-col flex-1 overflow-y-auto'>
             <nav className='flex-1 px-2 py-4 space-y-1'>
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
-                CORE
+                {t('CORE')}
               </div>
               <Link
                 to='dashboard'
@@ -44,10 +47,10 @@ function AdminPanel() {
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='home'
                 />
-                Dashboard
+                {t('Dashboard')}
               </Link>
-              <a
-                href='home'
+              <Link
+                to='/'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
                 target='_blank'
               >
@@ -56,10 +59,10 @@ function AdminPanel() {
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='global'
                 />
-                View Website
-              </a>
+                {t('View Website')}
+              </Link>
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
-                INTERFACE
+                {t('INTERFACE')}
               </div>
               <Link
                 to='movies'
@@ -70,7 +73,7 @@ function AdminPanel() {
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='movies'
                 />
-                Movies
+                {t('Movies')}
               </Link>
 
               <Link
@@ -82,7 +85,7 @@ function AdminPanel() {
                   className='flex-shrink-0 w-6 h-6 mr-3'
                   alt='quotes'
                 />
-                Quotes
+                {t('Quotes')}
               </Link>
             </nav>
           </div>
@@ -91,7 +94,7 @@ function AdminPanel() {
       <div className='flex flex-col md:pl-64'>
         <div className='sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow'>
           <div className='flex justify-between flex-1 px-4'>
-            <div className='flex flex-1 mt-4'>Dashboard</div>
+            <div className='flex flex-1 mt-4'>{t('Dashboard')}</div>
             <div className='flex items-center ml-4 md:ml-6'>
               <div className='relative ml-3'>
                 <div>
@@ -105,7 +108,7 @@ function AdminPanel() {
                       className='flex-shrink-0 w-6 h-6 text-gray-500'
                       alt='logout'
                     />
-                    Log Out
+                    {t('Log Out')}
                   </button>
                 </div>
               </div>

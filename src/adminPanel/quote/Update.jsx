@@ -5,8 +5,10 @@ import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Update() {
+  const { t } = useTranslation();
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [editQuote, setEditQuote] = useState();
@@ -65,11 +67,11 @@ function Update() {
                 src={Table}
                 alt='table'
               />
-              Edit Quote
+              {t('Edit Quote')}
             </p>
             <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
               <img className='w-6 h-6' src={Eye} alt='eye' />
-              <Link to={'/adminpanel/quotes'}>All Quotes</Link>
+              <Link to={'/adminpanel/quotes'}>{t('All Quotes')}</Link>
             </button>
           </div>
 
@@ -169,7 +171,7 @@ function Update() {
                 type='submit'
                 className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
               >
-                Update
+                {t('Update')}
               </button>
             </div>
           </form>

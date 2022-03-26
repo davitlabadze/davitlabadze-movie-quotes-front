@@ -1,10 +1,15 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 function OneQuoteCard() {
+  const { t } = useTranslation();
   const [quote, setQuote] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [noQoute, setNoQoute] = useState('');
+
   useEffect(() => {
     getRandomQuote();
   }, []);
@@ -14,14 +19,19 @@ function OneQuoteCard() {
     axios
       .get('get-quote')
       .then((res) => {
-        setQuote(res.data);
+        if (res.data) {
+          setQuote(res.data);
+        } else {
+          setNoQoute('noQoute');
+        }
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
+        setNoQoute('noQoute');
       });
     setIsLoading(false);
   };
-  const lang = localStorage.getItem('lang') || 'en';
 
   return (
     <Fragment>
@@ -36,26 +46,26 @@ function OneQuoteCard() {
               />
             </div>
             <h1 className='py-12 text-5xl text-center text-white'>
-              {quote.quote[lang]}
+              {quote.quote[i18n.language]}
             </h1>
             <div className='py-2 text-center text-white'>
               <Link
                 to={`/movie-quotes/${quote.movie_id}`}
                 className='font-sans text-5xl underline'
               >
-                {quote.movie.movie[lang]}
+                {quote.movie.movie[i18n.language]}
               </Link>
             </div>
           </div>
         </div>
       )}
-      {!isLoading && !quote && (
-        <h1 className='text-5xl text-center text-white py-96'>
-          No posts have been added yet
-        </h1>
+      {isLoading && !quote && (
+        <h1 className='text-5xl text-center text-white py-96'>loading...</h1>
       )}
-      {isLoading && (
-        <h1 className='text-5xl text-center text-white py-96'>Loading...</h1>
+      {!quote && noQoute === 'noQoute' && (
+        <h1 className='text-5xl text-center text-white py-96'>
+          {t('No information available')}
+        </h1>
       )}
     </Fragment>
   );

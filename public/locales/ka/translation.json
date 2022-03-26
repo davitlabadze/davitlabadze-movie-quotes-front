@@ -1,0 +1,32 @@
+{
+    "Go to Adminpanel": "ადმინპანელიში შესვლა",
+    "Authorization for the administrator": "ავტორიზაცია ადმინისტრატორისთვის",
+    "No information available" : "ინფორმაცია არ არის",
+    "email" : "ემაილი",
+    "password" : "პაროლი",
+    "Log In":"შესვლა",
+    "Log Out": "გასვლა",
+    "Authorization":"ავტორიზაცია",
+    "Back": "უკან",
+    "Loading":"მიმდინარეობს ჩატვირთვა",
+    "Recent Movies quotes":"ბოლო ფილმების ციტატები",
+    "Adminpanel":"მართვის მენიუ",
+    "Dashboard": "დაფა",
+    "View Website":"საიტზე გადასვლა",
+    "CORE":"ბირთვი",
+    "INTERFACE":"ინტერფეისი",
+    "Movies":"ფილმები",
+    "Quotes":"ციტატები",
+    "All Movies": "ფილმები",
+    "Add Movie": "ფილმის დამატება",
+    "Edit Movie":"ფილმის განახლება",
+    "All Quotes":"ციტატები",
+    "Add Quote": "ციტატის დამატება",
+    "Edit Quote":"ციტატის განახლება",
+    "Create":"დამატება",
+    "Update": "განახლება"
+}
+
+
+
+

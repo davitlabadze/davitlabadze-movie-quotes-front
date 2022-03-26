@@ -24,6 +24,7 @@ function App() {
           <Route path='movie-quotes/:movieId/*' element={<AllQuotesCard />} />
           <Route path='login' element={<Login />} />
         </Route>
+
         {localStorage.getItem('token') ? (
           <Route path='/adminpanel/' element={<AdminPanel />}>
             <Route path='dashboard' element={<Dashboard />} />
