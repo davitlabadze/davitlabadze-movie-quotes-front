@@ -9,6 +9,7 @@ import Logout from '../img/logout.svg';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/forAdminPanel/LanguageSwitcher';
 
 function AdminPanel() {
   const { t } = useTranslation();
@@ -93,19 +94,22 @@ function AdminPanel() {
       </div>
       <div className='flex flex-col md:pl-64'>
         <div className='sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow'>
-          <div className='flex justify-between flex-1 px-4'>
-            <div className='flex flex-1 mt-4'>{t('Dashboard')}</div>
+          <div className='flex justify-between flex-1 px-4 bg-green-500'>
+            <div className='flex flex-1 mt-4 font-bold text-gray-900 '>
+              {t('Dashboard')}
+            </div>
             <div className='flex items-center ml-4 md:ml-6'>
+              <LanguageSwitcher />
               <div className='relative ml-3'>
                 <div>
                   <button
                     type='button'
-                    className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                    className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md bg-slate-800 hover:bg-gray-900 hover:text-white group'
                     onClick={logoutSubmit}
                   >
                     <img
                       src={Logout}
-                      className='flex-shrink-0 w-6 h-6 text-gray-500'
+                      className='flex-shrink-0 w-6 h-6 text-gray-500 '
                       alt='logout'
                     />
                     {t('Log Out')}
