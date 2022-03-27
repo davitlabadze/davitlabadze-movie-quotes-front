@@ -24,7 +24,7 @@ function Dashboard() {
             ...datas,
             moviesCount: res.data.moviesCount,
             quotesCount: res.data.quotesCount,
-            quotes: res.data.quotes.data,
+            quotes: res.data.quotes,
           };
         });
       })
@@ -75,7 +75,7 @@ function Dashboard() {
         </div>
       </div>
 
-      <DashboardTable data={data} />
+      <DashboardTable data={data.quotes} />
     </div>
   );
 }

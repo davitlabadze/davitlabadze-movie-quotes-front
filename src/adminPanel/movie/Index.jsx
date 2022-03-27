@@ -61,59 +61,44 @@ function Index() {
               <Link to='create-data'>{t('Add Movie')} </Link>
             </button>
           </div>
-          <table className='min-w-full divide-y divide-gray-200'>
-            <thead className='bg-gray-50'>
-              <tr>
-                <th
-                  scope='col'
-                  className='px-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
+
+          <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
+            <thead className='flex w-full text-white bg-gray-50'>
+              <tr className='flex w-full mb-2'>
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
                   Id
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
                   Movie_en
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
                   Movie_ka
                 </th>
-                <th
-                  scope='col'
-                  colSpan='2'
-                  className='px-2 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase '
-                >
-                  <span className=''>Action</span>
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  <span>Action</span>
                 </th>
               </tr>
             </thead>
-
-            <tbody>
-              {movies.data.map((movie) => (
-                <tr className='bg-white' key={movie.id}>
-                  <td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                    {movie.id}
-                  </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+            <tbody className='flex flex-col items-center w-full overflow-y-scroll h-96 '>
+              {movies.map((movie) => (
+                <tr className='flex w-full bg-white' key={movie.id}>
+                  <td className='w-1/4 p-4 px-6 text-gray-900'>{movie.id}</td>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {movie.movie.en}
                   </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {movie.movie.ka}
                   </td>
-
-                  <td className='text-sm font-medium text-right whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-center '>
                     <Link to={`/adminpanel/movies/${movie.id}/edit`}>
-                      <button>
+                      <button className='ml-4'>
                         <img src={Pen} className='w-6 h-6' alt='edit-pen' />
                       </button>
                     </Link>
-                  </td>
-                  <td className='text-sm font-medium text-center whitespace-nowrap'>
-                    <button onClick={() => deleteMovie(movie.id)}>
+                    <button
+                      onClick={() => deleteMovie(movie.id)}
+                      className='ml-2'
+                    >
                       <img src={Delete} className='w-6 h-6' alt='delete' />
                     </button>
                   </td>
@@ -121,7 +106,6 @@ function Index() {
               ))}
             </tbody>
           </table>
-          <div>1 2 3</div>
         </div>
       )}
       {!isLoading && !movies && (

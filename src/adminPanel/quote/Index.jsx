@@ -23,6 +23,7 @@ function Index() {
       .get('quotes')
       .then((res) => {
         setQuotes(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -59,74 +60,51 @@ function Index() {
               <Link to='create-quote'>{t('Add Quote')}</Link>
             </button>
           </div>
-          <table className='min-w-full divide-y divide-gray-200'>
-            <thead className='bg-gray-50'>
-              <tr>
-                <th
-                  scope='col'
-                  className='px-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
+          <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
+            <thead className='flex w-full text-white bg-gray-50'>
+              <tr className='flex w-full mb-2'>
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
                   Id
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
-                  Movies_en
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  Movie_en
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
-                  Movies_ka
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  Movie_ka
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
-                  Quotes_en
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  Quote_en
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
-                  Quotes_ka
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  Quote_ka
                 </th>
-                <th
-                  scope='col'
-                  className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
-                >
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
                   Image
                 </th>
-                <th
-                  scope='col'
-                  colSpan='2'
-                  className='px-2 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase '
-                >
-                  <span className=''>Action</span>
+                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+                  <span>Action</span>
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {quotes.data.map((quote) => (
-                <tr className='bg-white' key={quote.id}>
-                  <td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
-                    {quote.id}
-                  </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+            <tbody className='flex flex-col items-center w-full overflow-y-scroll h-96 '>
+              {quotes.map((quote) => (
+                <tr className='flex w-full bg-white' key={quote.id}>
+                  <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {quote.movie.movie.en}
                   </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {quote.movie.movie.ka}
                   </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {quote.quote.en}
                   </td>
-                  <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     {quote.quote.ka}
                   </td>
-                  <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500'>
                     <img
+                      className='ml-14 '
                       key={quote.id}
                       src={`http://localhost:8000/storage/${quote.thumbnail}`}
                       width='64'
@@ -134,15 +112,16 @@ function Index() {
                       alt='movie img'
                     />
                   </td>
-                  <td className='text-sm font-medium text-right whitespace-nowrap'>
+                  <td className='w-1/4 p-4 px-6 text-center '>
                     <Link to={`/adminpanel/quotes/${quote.id}/edit`}>
-                      <button>
+                      <button className='ml-4'>
                         <img src={Pen} className='w-6 h-6' alt='edit-pen' />
                       </button>
                     </Link>
-                  </td>
-                  <td className='text-sm font-medium text-center whitespace-nowrap'>
-                    <button onClick={() => deleteQuote(quote.id)}>
+                    <button
+                      onClick={() => deleteQuote(quote.id)}
+                      className='ml-2'
+                    >
                       <img src={Delete} className='w-6 h-6' alt='delete' />
                     </button>
                   </td>
@@ -150,7 +129,6 @@ function Index() {
               ))}
             </tbody>
           </table>
-          <div>1 2 3</div>
         </div>
       )}
       {!isLoading && !quotes && (

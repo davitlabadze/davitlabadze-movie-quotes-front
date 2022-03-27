@@ -21,7 +21,7 @@ function Create() {
     formData.append('movie-ka', data.movieKa);
 
     axios
-      .post('movies/creataasd', formData)
+      .post('movies/create', formData)
       .then((res) => {
         if (res.status === 200) {
           setMessage('successfully');
