@@ -32,7 +32,7 @@ const DashboardTable = (props) => {
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>Image</th>
           </tr>
         </thead>
-        <tbody className='flex flex-col items-center w-full overflow-y-scroll h-96 '>
+        <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
           {data.map((quote) => (
             <tr className='flex w-full bg-white' key={quote.id}>
               <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>

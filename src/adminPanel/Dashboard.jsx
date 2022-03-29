@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import DashboardTable from 'components/adminPanelComponents/DashboardTable';
 import Movies from 'adminPanel/img/movies.svg';
 import Quotes from 'adminPanel/img/quotes.svg';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   const [data, setData] = useState({
@@ -46,15 +47,14 @@ function Dashboard() {
             />
           </div>
           <div className='flex-1 min-w-0'>
-            <a
-              href="{{ route('movies.index') }}"
-              className='focus:outline-none'
-            >
-              <p className='text-sm font-medium text-white'>All Movies</p>
-              <p className='text-sm text-white truncate'>
-                total: {data.moviesCount}
-              </p>
-            </a>
+            <Link to='/adminpanel/movies'>
+              <h3 className='focus:outline-none'>
+                <p className='text-sm font-medium text-white'>All Movies</p>
+                <p className='text-sm text-white truncate'>
+                  total: {data.moviesCount}
+                </p>
+              </h3>
+            </Link>
           </div>
         </div>
         <div className='relative flex items-center px-6 py-5 space-x-3 bg-blue-500 border rounded-lg shadow-sm hover:bg-blue-600'>
@@ -66,15 +66,14 @@ function Dashboard() {
             />
           </div>
           <div className='flex-1 min-w-0'>
-            <a
-              href="{{ route('quotes.index') }}"
-              className='focus:outline-none'
-            >
-              <p className='text-sm font-medium text-white'>All Quotes</p>
-              <p className='text-sm text-white truncate'>
-                total: {data.quotesCount}
-              </p>
-            </a>
+            <Link to='/adminpanel/quotes'>
+              <h3 className='focus:outline-none'>
+                <p className='text-sm font-medium text-white'>All Quotes</p>
+                <p className='text-sm text-white truncate'>
+                  total: {data.quotesCount}
+                </p>
+              </h3>
+            </Link>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ function AdminPanel() {
                 {t('CORE')}
               </div>
               <Link
-                to='dashboard'
+                to='/adminpanel/dashboard'
                 className='flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
               >
                 <img
@@ -70,7 +70,7 @@ function AdminPanel() {
                 {t('INTERFACE')}
               </div>
               <Link
-                to='movies'
+                to='/adminpanel/movies'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img
@@ -82,7 +82,7 @@ function AdminPanel() {
               </Link>
 
               <Link
-                to='quotes'
+                to='/adminpanel/quotes'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
               >
                 <img

@@ -27,7 +27,12 @@
     "Update": "განახლება",
 
     "Value is required":"ველი ცარიელია",
-    "The film is not selected" : "ფილმი არ არის არჩეული"
+    "The film is not selected" : "ფილმი არ არის არჩეული",
+
+    "The page you're looking for doesn't exist":"გვერდი, რომელსაც ეძებთ, არ არსებობს",
+    "Oops!":"უი!",
+    "Page not found":"გვერდი არ მოიძებნა",
+    "Return to the home page":"დაუბრუნდით მთავარ გვერდზე"
 }
 
 

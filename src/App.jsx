@@ -19,25 +19,27 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<FrontendLayout />}>
+        <Route element={<FrontendLayout />}>
           <Route path='/' element={<SingleQuote />} />
-          <Route path='movie-quotes/:movieId/*' element={<MovieQuotes />} />
+          <Route path='movie-quotes/:movieId' element={<MovieQuotes />} />
           <Route path='login' element={<Login />} />
         </Route>
-
-        {localStorage.getItem('token') ? (
-          <Route path='/adminpanel/' element={<AdminPanel />}>
-            <Route path='dashboard' element={<Dashboard />} />
-            <Route path='movies' element={<Movies />}></Route>
-            <Route path='movies/create-data' element={<Create />} />
-            <Route path='movies/:movieId/edit' element={<Update />} />
-            <Route path='quotes' element={<Quote />}></Route>
-            <Route path='quotes/create-quote' element={<CreateQuote />} />
-            <Route path='quotes/:quoteId/edit' element={<UpdateQuote />} />
-          </Route>
-        ) : (
-          <Route path='*' element={<PageNotFound />} />
-        )}
+        <Route element={<AdminPanel />}>
+          <Route index path='/adminpanel/dashboard' element={<Dashboard />} />
+          <Route path='/adminpanel/movies' element={<Movies />}></Route>
+          <Route path='/adminpanel/movies/create-data' element={<Create />} />
+          <Route path='/adminpanel/movies/:movieId/edit' element={<Update />} />
+          <Route path='/adminpanel/quotes' element={<Quote />}></Route>
+          <Route
+            path='/adminpanel/quotes/create-quote'
+            element={<CreateQuote />}
+          />
+          <Route
+            path='/adminpanel/quotes/:quoteId/edit'
+            element={<UpdateQuote />}
+          />
+        </Route>
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>
   );
