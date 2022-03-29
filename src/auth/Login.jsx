@@ -13,21 +13,24 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    axios
-      .post('login', {
-        email: data.email,
-        password: data.password,
-      })
-      .then((res) => {
-        localStorage.setItem('token', res.data.token);
-        console.log(res.data);
-        navigate('/adminpanel/dashboard', { replace: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+  const onSubmit = async (data) => {
+    try {
+      await axios
+        .post('login', {
+          email: data.email,
+          password: data.password,
+        })
+        .then((res) => {
+          localStorage.setItem('token', res.data.token);
+          navigate('/adminpanel/dashboard', { replace: true });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
