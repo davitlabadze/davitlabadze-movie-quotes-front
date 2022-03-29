@@ -2,9 +2,9 @@ import React, { useEffect, useState, Fragment, useCallback } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import FlashMessage from '../../components/forAdminPanel/FlashMessage';
-import Table from '../../img/table.svg';
-import Eye from '../../img/eye.svg';
+import FlashMessage from 'components/adminPanelComponents/FlashMessage';
+import Table from 'adminPanel/img/table.svg';
+import Eye from 'adminPanel/img/eye.svg';
 import { useTranslation } from 'react-i18next';
 
 function Update() {

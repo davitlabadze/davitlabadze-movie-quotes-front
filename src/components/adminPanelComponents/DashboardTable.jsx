@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Recent from '../../img/recent.svg';
+import Recent from 'adminPanel/img/recent.svg';
 
 const DashboardTable = (props) => {
   const { t } = useTranslation();

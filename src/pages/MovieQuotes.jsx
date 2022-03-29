@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import Header from './Header';
+import Header from 'components/frontendComponents/Header';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import i18n from 'i18next';

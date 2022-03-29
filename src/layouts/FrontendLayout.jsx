@@ -1,6 +1,6 @@
 import React from 'react';
-import LanguageSwitcher from '../components/forFrontend/LanguageSwitcher';
-import LoginForAdmin from '../components/forFrontend/LoginForAdmin';
+import LanguageSwitcher from 'components/frontendComponents/LanguageSwitcher';
+import LoginForAdmin from 'components/frontendComponents/LoginForAdmin';
 import { Outlet } from 'react-router-dom';
 
 function FrontendLayout() {

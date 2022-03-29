@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Home from '../img/home.svg';
-import Global from '../img/global.svg';
-import Movie from '../img/movies.svg';
-import Quote from '../img/quotes.svg';
-import Logout from '../img/logout.svg';
+import Home from 'adminPanel/img/home.svg';
+import Global from 'adminPanel/img/global.svg';
+import Movie from 'adminPanel/img/movies.svg';
+import Quote from 'adminPanel/img/quotes.svg';
+import Logout from 'adminPanel/img/logout.svg';
 
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '../components/forAdminPanel/LanguageSwitcher';
+import LanguageSwitcher from 'components/adminPanelComponents/LanguageSwitcher';
 
 function AdminPanel() {
   const { t } = useTranslation();

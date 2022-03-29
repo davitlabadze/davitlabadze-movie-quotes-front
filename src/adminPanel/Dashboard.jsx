@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import DashboardTable from '../components/forAdminPanel/DashboardTable';
-import Movies from '../img/movies.svg';
-import Quotes from '../img/quotes.svg';
+import DashboardTable from 'components/adminPanelComponents/DashboardTable';
+import Movies from 'adminPanel/img/movies.svg';
+import Quotes from 'adminPanel/img/quotes.svg';
 
 function Dashboard() {
   const [data, setData] = useState({

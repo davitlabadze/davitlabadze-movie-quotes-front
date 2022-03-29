@@ -1,11 +1,11 @@
-import Table from '../../img/table.svg';
-import Eye from '../../img/eye.svg';
+import Table from 'adminPanel/img/table.svg';
+import Eye from 'adminPanel/img/eye.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FlashMessage from '../../components/forAdminPanel/FlashMessage';
+import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 
 function Create() {
   const { t } = useTranslation();

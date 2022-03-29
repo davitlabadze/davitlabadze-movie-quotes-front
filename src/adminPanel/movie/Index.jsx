@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Table from '../../img/table.svg';
-import Plus from '../../img/plus.svg';
-import Pen from '../../img/pen.svg';
-import Delete from '../../img/delete.svg';
+import Table from 'adminPanel/img/table.svg';
+import Plus from 'adminPanel/img/plus.svg';
+import Pen from 'adminPanel/img/pen.svg';
+import Delete from 'adminPanel/img/delete.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

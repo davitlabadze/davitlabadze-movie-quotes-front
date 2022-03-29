@@ -1,27 +1,27 @@
 import React from 'react';
-import './App.css';
-import FrontendLayout from './layouts/FrontendLayout';
-import AdminPanel from './layouts/AdminPanel';
+import 'App.css';
+import FrontendLayout from 'layouts/FrontendLayout';
+import AdminPanel from 'layouts/AdminPanel';
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from './adminPanel/Dashboard';
-import Movies from './adminPanel/movie/Index';
-import Quote from './adminPanel/quote/Index';
-import Create from './adminPanel/movie/Create';
-import Update from './adminPanel/movie/Update';
-import CreateQuote from './adminPanel/quote/Create';
-import UpdateQuote from './adminPanel/quote/Update';
-import PageNotFound from './404/PageNotFound';
-import OneQuoteCard from './components/forFrontend/OneQuoteCard';
-import AllQuotesCard from './components/forFrontend/AllQuotesCard';
-import Login from './auth/Login';
+import Dashboard from 'adminPanel/Dashboard';
+import Movies from 'adminPanel/movie/Index';
+import Quote from 'adminPanel/quote/Index';
+import Create from 'adminPanel/movie/Create';
+import Update from 'adminPanel/movie/Update';
+import CreateQuote from 'adminPanel/quote/Create';
+import UpdateQuote from 'adminPanel/quote/Update';
+import PageNotFound from '404/PageNotFound';
+import SingleQuote from 'pages/SingleQuote';
+import MovieQuotes from 'pages/MovieQuotes';
+import Login from 'auth/Login';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path='/' element={<FrontendLayout />}>
-          <Route path='/' element={<OneQuoteCard />} />
-          <Route path='movie-quotes/:movieId/*' element={<AllQuotesCard />} />
+          <Route path='/' element={<SingleQuote />} />
+          <Route path='movie-quotes/:movieId/*' element={<MovieQuotes />} />
           <Route path='login' element={<Login />} />
         </Route>
 

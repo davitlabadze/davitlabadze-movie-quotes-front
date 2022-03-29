@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import BackButton from './BackButton';
-import Movietitle from './MovieTitle';
+import BackButton from 'components/frontendComponents/BackButton';
+import Movietitle from 'components/frontendComponents/MovieTitle';
 
 function Header(props) {
   const [header, setHeader] = useState(false);
