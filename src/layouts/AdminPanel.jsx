@@ -15,17 +15,21 @@ function AdminPanel() {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
-  const logoutSubmit = (e) => {
+  const logoutSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post('logout')
-      .then((res) => {
-        if (res.data.status === 200) {
-          localStorage.removeItem('token');
-          navigate('/', { replace: true });
-        }
-      })
-      .catch((err) => console.log(err));
+    try {
+      await axios
+        .post('logout')
+        .then((res) => {
+          if (res.data.status === 200) {
+            localStorage.removeItem('token');
+            navigate('/', { replace: true });
+          }
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <div>
