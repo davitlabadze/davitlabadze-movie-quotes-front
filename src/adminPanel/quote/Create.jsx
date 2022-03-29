@@ -6,6 +6,7 @@ import Eye from 'adminPanel/img/eye.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Button from 'components/adminPanelComponents/Button';
 
 function Create() {
   const [message, setMessage] = useState('');
@@ -171,13 +172,10 @@ function Create() {
           )}
         </div>
         <div className='flex mb-6 w-min'>
-          <button
-            type='submit'
-            className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
-          >
-            {t('Create')}
-          </button>
-          <FlashMessage flash={message} />
+          <div className='flex mb-6 w-min'>
+            <Button flash={message} title='Create' />
+            <FlashMessage flash={message} />
+          </div>
         </div>
       </form>
     </div>

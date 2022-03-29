@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Button from 'components/adminPanelComponents/Button';
 import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 
 function Create() {
@@ -106,15 +107,8 @@ function Create() {
             </p>
           )}
         </div>
-
         <div className='flex mb-6 w-min'>
-          <button
-            type='submit'
-            className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
-          >
-            {t('Create')}
-          </button>
-
+          <Button flash={message} title='Create' />
           <FlashMessage flash={message} />
         </div>
       </form>

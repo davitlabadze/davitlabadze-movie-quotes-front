@@ -6,6 +6,7 @@ import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import Table from 'adminPanel/img/table.svg';
 import Eye from 'adminPanel/img/eye.svg';
 import { useTranslation } from 'react-i18next';
+import Button from 'components/adminPanelComponents/Button';
 
 function Update() {
   const { t } = useTranslation();
@@ -131,12 +132,7 @@ function Update() {
               )}
             </div>
             <div className='flex mb-6 w-min'>
-              <button
-                type='submit'
-                className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
-              >
-                {t('Update')}
-              </button>
+              <Button flash={message} title='Update' />
               <FlashMessage flash={message} />
             </div>
           </form>
