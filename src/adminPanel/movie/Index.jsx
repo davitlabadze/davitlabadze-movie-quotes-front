@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-
 import Table from '../../img/table.svg';
 import Plus from '../../img/plus.svg';
 import Pen from '../../img/pen.svg';
@@ -16,30 +15,36 @@ function Index() {
     getMovies();
   }, []);
 
-  const getMovies = () => {
+  const getMovies = async () => {
     setIsLoading(true);
-    axios
-      .get('movies')
-      .then((res) => {
-        setMovies(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await axios
+        .get('movies')
+        .then((res) => {
+          setMovies(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
     setIsLoading(false);
   };
 
-  const deleteMovie = (id) => {
-    axios
-      .delete(`movies/${id}`)
-      .then((res) => {
-        console.log(res);
-        getMovies();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const deleteMovie = async (id) => {
+    try {
+      await axios
+        .delete(`movies/${id}`)
+        .then((res) => {
+          getMovies();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -79,7 +84,7 @@ function Index() {
                 </th>
               </tr>
             </thead>
-            <tbody className='flex flex-col items-center w-full overflow-y-scroll h-96 '>
+            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
               {movies.map((movie) => (
                 <tr className='flex w-full bg-white' key={movie.id}>
                   <td className='w-1/4 p-4 px-6 text-gray-900'>{movie.id}</td>

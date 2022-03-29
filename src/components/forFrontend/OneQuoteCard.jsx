@@ -8,28 +8,29 @@ function OneQuoteCard() {
   const { t } = useTranslation();
   const [quote, setQuote] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [noQoute, setNoQoute] = useState('');
 
   useEffect(() => {
     getRandomQuote();
   }, []);
 
-  const getRandomQuote = () => {
+  const getRandomQuote = async () => {
     setIsLoading(true);
-    axios
-      .get('get-quote')
-      .then((res) => {
-        if (res.data) {
-          setQuote(res.data);
-        } else {
-          setNoQoute('noQoute');
-        }
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setNoQoute('noQoute');
-      });
+    try {
+      await axios
+        .get('get-quote')
+        .then((res) => {
+          if (res.data) {
+            setQuote(res.data);
+          } else {
+          }
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
     setIsLoading(false);
   };
 
@@ -60,9 +61,11 @@ function OneQuoteCard() {
         </div>
       )}
       {isLoading && !quote && (
-        <h1 className='text-5xl text-center text-white py-96'>loading...</h1>
+        <h1 className='text-5xl text-center text-white py-96'>
+          {t('loading')}...
+        </h1>
       )}
-      {!quote && noQoute === 'noQoute' && (
+      {!quote && (
         <h1 className='text-5xl text-center text-white py-96'>
           {t('No information available')}
         </h1>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, useCallback } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
+import FlashMessage from '../../components/forAdminPanel/FlashMessage';
 import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,8 @@ function Update() {
 
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [editMovie, setEditMovie] = useState();
+  const [movie, setMovie] = useState();
+  const [message, setMessage] = useState('');
 
   const {
     register,
@@ -23,41 +24,49 @@ function Update() {
 
   const params = useParams();
 
-  useEffect(() => {
-    getEditMovie();
-  }, []);
-
-  const getEditMovie = () => {
+  const getMovie = useCallback(async () => {
     setIsLoading(true);
-    axios
-      .get(`movies/${params.movieId}/edit`)
-      .then((res) => {
-        setEditMovie(res.data);
+    try {
+      await axios.get(`movies/${params.movieId}/edit`).then((res) => {
+        setMovie(res.data);
         setID(res.data.id);
         setValue('movieEn', res.data.movie.en);
         setValue('movieKa', res.data.movie.ka);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+      });
+    } catch (err) {
+      console.error(err);
+    }
     setIsLoading(false);
+  }, [params.movieId, setValue]);
+
+  useEffect(() => {
+    getMovie();
+    const timer = setTimeout(() => {
+      setMessage('');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [message, getMovie]);
+
+  const updateMovie = async (data) => {
+    try {
+      await axios
+        .put(`movies/${id}/update`, {
+          'movie-en': data.movieEn,
+          'movie-ka': data.movieKa,
+        })
+        .then((res) => {
+          setMessage('successfully!');
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const updateMovie = (data) => {
-    axios
-      .put(`movies/${id}/edit`, {
-        'movie-en': data.movieEn,
-        'movie-ka': data.movieKa,
-      })
-      .then((res) => {
-        getEditMovie();
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
+  const emptyValueMessage = `${t('Value is required')}`;
   return (
     <Fragment>
-      {!isLoading && editMovie && (
+      {!isLoading && movie && (
         <div>
           <div className='flex p-2 mb-10 -mt-12'>
             <p className='flex p-2'>
@@ -89,7 +98,7 @@ function Update() {
                 name='movie-en'
                 id='movie-en'
                 {...register('movieEn', {
-                  required: 'Value is required',
+                  required: emptyValueMessage,
                 })}
               />
               {errors.movieEn && (
@@ -113,7 +122,7 @@ function Update() {
                 type='text'
                 name='movie-ka'
                 id='movie-ka'
-                {...register('movieKa', { required: 'Value is required' })}
+                {...register('movieKa', { required: emptyValueMessage })}
               />
               {errors.movieKa && (
                 <p className='mt-2 text-xs text-red-500'>
@@ -121,14 +130,14 @@ function Update() {
                 </p>
               )}
             </div>
-            <div className='mb-6 w-min'>
+            <div className='flex mb-6 w-min'>
               <button
-                onClick={updateMovie}
                 type='submit'
                 className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
               >
                 {t('Update')}
               </button>
+              <FlashMessage flash={message} />
             </div>
           </form>
         </div>

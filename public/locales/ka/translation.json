@@ -24,7 +24,10 @@
     "Add Quote": "ციტატის დამატება",
     "Edit Quote":"ციტატის განახლება",
     "Create":"დამატება",
-    "Update": "განახლება"
+    "Update": "განახლება",
+
+    "Value is required":"ველი ცარიელია",
+    "The film is not selected" : "ფილმი არ არის არჩეული"
 }
 
 

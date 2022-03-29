@@ -17,29 +17,35 @@ function Index() {
     getQuotes();
   }, []);
 
-  const getQuotes = () => {
+  const getQuotes = async () => {
     setIsLoading(true);
-    axios
-      .get('quotes')
-      .then((res) => {
-        setQuotes(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await axios
+        .get('quotes')
+        .then((res) => {
+          setQuotes(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
     setIsLoading(false);
   };
-  const deleteQuote = (id) => {
-    axios
-      .delete(`quotes/${id}`)
-      .then((res) => {
-        console.log(res);
-        getQuotes();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const deleteQuote = async (id) => {
+    try {
+      await axios
+        .delete(`quotes/${id}`)
+        .then((res) => {
+          getQuotes();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -86,7 +92,7 @@ function Index() {
                 </th>
               </tr>
             </thead>
-            <tbody className='flex flex-col items-center w-full overflow-y-scroll h-96 '>
+            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
               {quotes.map((quote) => (
                 <tr className='flex w-full bg-white' key={quote.id}>
                   <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>

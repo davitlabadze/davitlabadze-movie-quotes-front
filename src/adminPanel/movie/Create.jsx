@@ -3,8 +3,9 @@ import Eye from '../../img/eye.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import FlashMessage from '../../components/forAdminPanel/FlashMessage';
 
 function Create() {
   const { t } = useTranslation();
@@ -12,26 +13,41 @@ function Create() {
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append('movie-en', data.movieEn);
-    formData.append('movie-ka', data.movieKa);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (formState.isSubmitSuccessful) {
+        setMessage('');
+        reset({
+          movieEn: '',
+          movieKa: '',
+        });
+      }
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [message, formState, reset]);
 
-    axios
-      .post('movies/create', formData)
-      .then((res) => {
-        if (res.status === 200) {
-          setMessage('successfully');
-        } else {
-          setMessage('error');
-        }
-      })
-      .catch((err) => setMessage('error'));
+  const createMovie = async (data) => {
+    try {
+      await axios
+        .post('movies/create', {
+          'movie-en': data.movieEn,
+          'movie-ka': data.movieKa,
+        })
+        .then((res) => {
+          setMessage('successfully!');
+        })
+        .catch(() => setMessage('error'));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
+  const emptyValue = `${t('Value is required')}`;
   return (
     <div>
       <div className='flex p-2 mb-10 -mt-12'>
@@ -44,7 +60,7 @@ function Create() {
           <Link to={'/adminpanel/movies'}>{t('All Movies')}</Link>
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className='mt-10'>
+      <form onSubmit={handleSubmit(createMovie)} className='mt-10'>
         <div className='mb-6'>
           <label
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
@@ -59,7 +75,7 @@ function Create() {
             type='text'
             name='movie-en'
             id='movie-en'
-            {...register('movieEn', { required: 'Value is required' })}
+            {...register('movieEn', { required: emptyValue })}
           />
           {errors.movieEn && (
             <p className='mt-2 text-xs text-red-500'>
@@ -82,7 +98,7 @@ function Create() {
             type='text'
             name='movie-ka'
             id='movie-ka'
-            {...register('movieKa', { required: 'Value is required' })}
+            {...register('movieKa', { required: emptyValue })}
           />
           {errors.movieKa && (
             <p className='mt-2 text-xs text-red-500'>
@@ -98,7 +114,8 @@ function Create() {
           >
             {t('Create')}
           </button>
-          {message}
+
+          <FlashMessage flash={message} />
         </div>
       </form>
     </div>

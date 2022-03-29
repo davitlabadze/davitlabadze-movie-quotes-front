@@ -15,20 +15,24 @@ function Dashboard() {
     getDashboardData();
   }, []);
 
-  const getDashboardData = () => {
-    axios
-      .get('dashboard')
-      .then((res) => {
-        setData((datas) => {
-          return {
-            ...datas,
-            moviesCount: res.data.moviesCount,
-            quotesCount: res.data.quotesCount,
-            quotes: res.data.quotes,
-          };
-        });
-      })
-      .catch((err) => console.log(err));
+  const getDashboardData = async () => {
+    try {
+      await axios
+        .get('dashboard')
+        .then((res) => {
+          setData((datas) => {
+            return {
+              ...datas,
+              moviesCount: res.data.moviesCount,
+              quotesCount: res.data.quotesCount,
+              quotes: res.data.quotes,
+            };
+          });
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <div>

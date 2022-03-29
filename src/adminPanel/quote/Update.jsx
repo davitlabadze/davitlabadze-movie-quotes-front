@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-
+import FlashMessage from '../../components/forAdminPanel/FlashMessage';
 import Table from '../../img/table.svg';
 import Eye from '../../img/eye.svg';
 import axios from 'axios';
@@ -11,7 +11,8 @@ function Update() {
   const { t } = useTranslation();
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [editQuote, setEditQuote] = useState();
+  const [quote, setQuote] = useState();
+  const [message, setMessage] = useState('');
   const [movies, setMovie] = useState([]);
 
   const {
@@ -20,45 +21,59 @@ function Update() {
     setValue,
     formState: { errors },
   } = useForm();
+
   const params = useParams();
 
-  useEffect(() => {
-    getEditQuote();
-  }, []);
-
-  const getEditQuote = () => {
+  const getQuote = useCallback(async () => {
     setIsLoading(true);
-    axios
-      .get(`quotes/${params.quoteId}/edit`)
-      .then((res) => {
-        setEditQuote(res.data);
-        setID(res.data.quote.id);
-        setValue('quoteEn', res.data.quote.quote.en);
-        setValue('quoteKa', res.data.quote.quote.ka);
-        setMovie(res.data.movies);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+    try {
+      await axios
+        .get(`quotes/${params.quoteId}/edit`)
+        .then((res) => {
+          setQuote(res.data);
+          setID(res.data.quote.id);
+          setValue('quoteEn', res.data.quote.quote.en);
+          setValue('quoteKa', res.data.quote.quote.ka);
+          setMovie(res.data.movies);
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.error(err);
+    }
     setIsLoading(false);
-  };
+  }, [params.quoteId, setValue]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  useEffect(() => {
+    getQuote();
+    const timer = setTimeout(() => {
+      setMessage('');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [message, getQuote]);
+
+  const updateQuote = async (data) => {
     const formData = new FormData();
+    formData.append('_method', 'PUT');
+    formData.append('thumbnail', data.image[0]);
+    formData.append('movie-id', data.movieId);
     formData.append('quote-en', data.quoteEn);
     formData.append('quote-ka', data.quoteKa);
-    formData.append('movie-id', data.movieId);
-    formData.append('thumbnail', data.image[0]);
-    axios
-      .put(`quotes/${id}/edit`, formData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+    try {
+      await axios(`quotes/${id}/update`, {
+        data: formData,
+        method: 'POST',
+      }).then((res) => setMessage('successfully!'));
+    } catch (error) {
+      throw new Error('Error');
+    }
   };
+
+  const emptyValueMessage = `${t('Value is required')}`;
+  const emptySelectMessage = `${t('The film is not selected')}`;
+
   return (
     <Fragment>
-      {!isLoading && editQuote && (
+      {!isLoading && quote && (
         <div>
           <div className='flex p-2 mb-10 -mt-12'>
             <p className='flex p-2'>
@@ -76,9 +91,9 @@ function Update() {
           </div>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            method='POST'
+            onSubmit={handleSubmit(updateQuote)}
             className='mt-10'
-            encType='multipart/form-data'
           >
             <div className='mb-6'>
               <label
@@ -95,10 +110,9 @@ function Update() {
                 name='quote-en'
                 id='quote-en'
                 {...register('quoteEn', {
-                  required: 'Value is required',
+                  required: emptyValueMessage,
                 })}
               />
-
               {errors.quoteEn && (
                 <p className='mt-2 text-xs text-red-500'>
                   {errors.quoteEn.message}
@@ -119,7 +133,7 @@ function Update() {
                 type='text'
                 name='quote-ka'
                 id='quote-ka'
-                {...register('quoteKa', { required: 'Value is required' })}
+                {...register('quoteKa', { required: emptyValueMessage })}
               />
 
               {errors.quoteKa && (
@@ -130,9 +144,9 @@ function Update() {
             </div>
             <div className='mb-6'>
               <select
-                name='movie_id'
+                name='movie-id'
                 {...register('movieId', {
-                  required: 'The film is not selected',
+                  required: emptySelectMessage,
                 })}
               >
                 {movies.map((movie) => (
@@ -158,7 +172,7 @@ function Update() {
               <input
                 type='file'
                 name='image'
-                {...register('image', { required: 'Value is required' })}
+                {...register('image', { required: emptyValueMessage })}
               />
               {errors.image && (
                 <p className='mt-2 text-xs text-red-500'>
@@ -166,13 +180,14 @@ function Update() {
                 </p>
               )}
             </div>
-            <div className='mb-6 w-min'>
+            <div className='flex mb-6 w-min'>
               <button
                 type='submit'
                 className='w-full px-4 py-2 text-white bg-green-600 rounded-lg rounderd hover:bg-green-700'
               >
                 {t('Update')}
               </button>
+              <FlashMessage flash={message} />
             </div>
           </form>
         </div>
