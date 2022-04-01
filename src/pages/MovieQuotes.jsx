@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 import Header from 'components/frontendComponents/Header';
 import axios from 'axios';
@@ -12,11 +12,7 @@ function Card() {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
 
-  useEffect(() => {
-    getMovieQuotes();
-  }, []);
-
-  const getMovieQuotes = async () => {
+  const getMovieQuotes = useCallback(async () => {
     setIsLoading(true);
     try {
       await axios
@@ -31,7 +27,11 @@ function Card() {
       console.error(err);
     }
     setIsLoading(false);
-  };
+  }, [params.movieId]);
+
+  useEffect(() => {
+    getMovieQuotes();
+  }, [getMovieQuotes]);
 
   return (
     <Fragment>
