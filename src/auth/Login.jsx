@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BackButton from 'components/frontendComponents/BackButton';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import useAuth from 'hooks/useAuth';
 
 function Login() {
+  const { setAuth } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
@@ -13,6 +15,8 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [errMessage, setErrMessage] = useState();
 
   const onSubmit = async (data) => {
     try {
@@ -22,17 +26,29 @@ function Login() {
           password: data.password,
         })
         .then((res) => {
-          localStorage.setItem('token', res.data.token);
-          navigate('/adminpanel/dashboard', { replace: true });
+          console.log(JSON.stringify(res?.data));
+          const checkUser = res?.data.user;
+          if (checkUser) {
+            localStorage.setItem('token', res.data.token);
+            const token = res?.data.token;
+            setAuth({ token });
+            navigate('/adminPanel/dashboard');
+          } else {
+            setErrMessage(res.data.status);
+            console.log(res.data.status);
+          }
         })
         .catch((err) => {
           console.log(err);
+          setErrMessage('404');
         });
     } catch (err) {
       console.error(err);
     }
   };
-
+  const emptyValueMessage = `${t('Value is required')}`;
+  const passwordIncorrect = `${t('The password is incorrect')}`;
+  const userNotExist = `${t('This user does not exist')}`;
   return (
     <div>
       <BackButton />
@@ -54,11 +70,18 @@ function Login() {
                 type='email'
                 name='email'
                 id='email'
-                {...register('email', { required: 'Value is field' })}
+                {...register('email', { required: emptyValueMessage })}
               />
               {errors.email && (
                 <span className='mt-2 text-xs text-red-500'>
                   {errors.email.message}
+                </span>
+              )}
+              {errors.email ? (
+                ''
+              ) : (
+                <span className='mt-2 text-xs text-red-500'>
+                  {errMessage === '404' ? userNotExist : ''}
                 </span>
               )}
             </div>
@@ -74,15 +97,22 @@ function Login() {
                 type='password'
                 name='password'
                 id='password'
-                {...register('password', { required: 'Value is field' })}
+                {...register('password', { required: emptyValueMessage })}
               />
               {errors.password && (
                 <span className='mt-2 text-xs text-red-500'>
                   {errors.password.message}
                 </span>
               )}
+              {errors.password ? (
+                ''
+              ) : (
+                <span className='mt-2 text-xs text-red-500'>
+                  {errMessage === '401' ? passwordIncorrect : ''}
+                </span>
+              )}
             </div>
-            <div className='mb-6'>
+            <div className='flex mb-6'>
               <button
                 type='submit'
                 className='px-4 py-2 text-white bg-gray-400 rounderd hover:bg-gray-500'

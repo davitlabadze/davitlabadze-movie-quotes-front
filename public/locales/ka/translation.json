@@ -2,7 +2,7 @@
     "Go to Adminpanel": "ადმინპანელიში შესვლა",
     "Authorization for the administrator": "ავტორიზაცია ადმინისტრატორისთვის",
     "No information available" : "ინფორმაცია არ არის",
-    "email" : "ემაილი",
+    "email" : "მეილი",
     "password" : "პაროლი",
     "Log In":"შესვლა",
     "Log Out": "გასვლა",
@@ -32,7 +32,10 @@
     "The page you're looking for doesn't exist":"გვერდი, რომელსაც ეძებთ, არ არსებობს",
     "Oops!":"უი!",
     "Page not found":"გვერდი არ მოიძებნა",
-    "Return to the home page":"დაუბრუნდით მთავარ გვერდზე"
+    "Return to the home page":"დაუბრუნდით მთავარ გვერდზე",
+    "The password is incorrect": "პაროლი არასწორია",
+    "This user does not exist": "მეილი არ არის რეგისტრირებული"
+
 }
 
 
