@@ -6,8 +6,9 @@ import Delete from 'adminPanel/img/delete.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import Title from 'components/Title';
 function Index() {
+  Title('AdminPanel | Movies');
   const { t } = useTranslation();
   const [movies, setMovies] = useState();
   const [isLoading, setIsLoading] = useState(false);

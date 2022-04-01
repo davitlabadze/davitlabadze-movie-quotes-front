@@ -5,11 +5,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuth from 'hooks/useAuth';
+import Title from 'components/Title';
 
 function Login() {
+  Title('Mvoies Quotes | login');
   const { setAuth } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,

@@ -4,8 +4,9 @@ import DashboardTable from 'components/adminPanelComponents/DashboardTable';
 import Movies from 'adminPanel/img/movies.svg';
 import Quotes from 'adminPanel/img/quotes.svg';
 import { Link } from 'react-router-dom';
-
+import Title from 'components/Title';
 function Dashboard() {
+  Title('AdminPanel | Dashboard');
   const [data, setData] = useState({
     moviesCount: '',
     quotesCount: '',

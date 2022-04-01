@@ -39,7 +39,7 @@ function Card() {
         <div>
           <Header title={quotes.movie[i18n.language]} />
           {quotes.quotes.map((quote) => (
-            <div className='flex justify-center mt-14 '>
+            <div className='flex justify-center mt-14' key={quote.id}>
               <div className='bg-white rounded-lg '>
                 <div className=' h-96'>
                   <img

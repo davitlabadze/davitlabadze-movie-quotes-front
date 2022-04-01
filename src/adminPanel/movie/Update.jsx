@@ -7,10 +7,10 @@ import Table from 'adminPanel/img/table.svg';
 import Eye from 'adminPanel/img/eye.svg';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
-
+import Title from 'components/Title';
 function Update() {
+  Title('Movie | Update');
   const { t } = useTranslation();
-
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [movie, setMovie] = useState();

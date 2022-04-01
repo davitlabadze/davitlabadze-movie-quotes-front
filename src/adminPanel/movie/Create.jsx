@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
 import FlashMessage from 'components/adminPanelComponents/FlashMessage';
-
+import Title from 'components/Title';
 function Create() {
+  Title('Movie | Create');
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const {

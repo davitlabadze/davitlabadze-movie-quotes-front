@@ -2,8 +2,9 @@ import React from 'react';
 import Image from '404/image.gif';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import Title from 'components/Title';
 const PageNotFound = () => {
+  Title('Page Not Found');
   const { t } = useTranslation();
   return (
     <div className='flex items-center justify-center w-screen h-screen bgcolor'>

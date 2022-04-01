@@ -7,8 +7,9 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
-
+import Title from 'components/Title';
 function Update() {
+  Title('Quote | Update');
   const { t } = useTranslation();
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
