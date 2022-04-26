@@ -74,22 +74,22 @@ function Index() {
                   Id
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Movie_en
+                  {t('Movie_en')}
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Movie_ka
+                  {t('Movie_ka')}
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Quote_en
+                  {t('Quote_en')}
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Quote_ka
+                  {t('Quote_ka')}
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Image
+                  {t('image')}
                 </th>
                 <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  <span>Action</span>
+                  <span>{t('action')}</span>
                 </th>
               </tr>
             </thead>

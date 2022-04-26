@@ -5,7 +5,11 @@ import Movies from 'adminPanel/img/movies.svg';
 import Quotes from 'adminPanel/img/quotes.svg';
 import { Link } from 'react-router-dom';
 import Title from 'components/Title';
+import { useTranslation } from 'react-i18next';
+
 function Dashboard() {
+  const { t } = useTranslation();
+
   Title('AdminPanel | Dashboard');
   const [data, setData] = useState({
     moviesCount: '',
@@ -50,9 +54,11 @@ function Dashboard() {
           <div className='flex-1 min-w-0'>
             <Link to='/adminpanel/movies'>
               <h3 className='focus:outline-none'>
-                <p className='text-sm font-medium text-white'>All Movies</p>
+                <p className='text-sm font-medium text-white'>
+                  {t('All Movies')}
+                </p>
                 <p className='text-sm text-white truncate'>
-                  total: {data.moviesCount}
+                  {t('total')}: {data.moviesCount}
                 </p>
               </h3>
             </Link>
@@ -69,9 +75,11 @@ function Dashboard() {
           <div className='flex-1 min-w-0'>
             <Link to='/adminpanel/quotes'>
               <h3 className='focus:outline-none'>
-                <p className='text-sm font-medium text-white'>All Quotes</p>
+                <p className='text-sm font-medium text-white'>
+                  {t('All Quotes')}
+                </p>
                 <p className='text-sm text-white truncate'>
-                  total: {data.quotesCount}
+                  {t('total')}: {data.quotesCount}
                 </p>
               </h3>
             </Link>

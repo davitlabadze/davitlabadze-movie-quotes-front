@@ -25,6 +25,7 @@
     "Edit Quote":"ციტატის განახლება",
     "Create":"დამატება",
     "Update": "განახლება",
+    "total" : "სულ",
 
     "Value is required":"ველი ცარიელია",
     "The film is not selected" : "ფილმი არ არის არჩეული",
@@ -34,7 +35,14 @@
     "Page not found":"გვერდი არ მოიძებნა",
     "Return to the home page":"დაუბრუნდით მთავარ გვერდზე",
     "The password is incorrect": "პაროლი არასწორია",
-    "This user does not exist": "მეილი არ არის რეგისტრირებული"
+    "This user does not exist": "მეილი არ არის რეგისტრირებული",
+
+    "Movie_en":"ფილმის სახელი ინგლისურად",
+    "Movie_ka":"ფილმის სახელი ქართულად",
+    "Quote_en":"ციტატა ინგლისურად",
+    "Quote_ka":"ციტატა ქართულად",
+    "image":"სურათი",
+    "action": "განახლება/წაშლა"
 
 }
 

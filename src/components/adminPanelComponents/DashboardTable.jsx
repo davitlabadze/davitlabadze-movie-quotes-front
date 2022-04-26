@@ -18,18 +18,20 @@ const DashboardTable = (props) => {
           <tr className='flex w-full mb-2'>
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>Id</th>
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-              Movie_en
+              {t('Movie_en')}
             </th>
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-              Movie_ka
+              {t('Movie_ka')}
             </th>
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-              Quote_en
+              {t('Quote_en')}
             </th>
             <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-              Quote_ka
+              {t('Quote_ka')}
             </th>
-            <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>Image</th>
+            <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
+              {t('image')}
+            </th>
           </tr>
         </thead>
         <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
