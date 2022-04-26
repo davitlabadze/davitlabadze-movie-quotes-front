@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
+import TableThead from 'components/adminPanelComponents/TableThead';
 function Index() {
   Title('AdminPanel | Quotes');
   const { t } = useTranslation();
@@ -68,31 +69,17 @@ function Index() {
             </button>
           </div>
           <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
-            <thead className='flex w-full text-white bg-gray-50'>
-              <tr className='flex w-full mb-2'>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Id
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Movie_en')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Movie_ka')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Quote_en')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Quote_ka')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('image')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  <span>{t('action')}</span>
-                </th>
-              </tr>
-            </thead>
+            <TableThead
+              title={[
+                `${t('id')}`,
+                `${t('Movie_en')}`,
+                `${t('Movie_ka')}`,
+                `${t('Quote_en')}`,
+                `${t('Quote_ka')}`,
+                `${t('image')}`,
+                `${t('action')}`,
+              ]}
+            />
             <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
               {quotes.map((quote) => (
                 <tr className='flex w-full bg-white' key={quote.id}>

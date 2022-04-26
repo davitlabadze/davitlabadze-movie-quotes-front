@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
+import TableThead from 'components/adminPanelComponents/TableThead';
 function Index() {
   Title('AdminPanel | Movies');
   const { t } = useTranslation();
@@ -69,22 +70,14 @@ function Index() {
           </div>
 
           <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
-            <thead className='flex w-full text-white bg-gray-50'>
-              <tr className='flex w-full mb-2'>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  Id
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Movie_en')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  {t('Movie_ka')}
-                </th>
-                <th className='w-1/4 p-2 text-xs text-gray-500 uppercase'>
-                  <span>{t('action')}</span>
-                </th>
-              </tr>
-            </thead>
+            <TableThead
+              title={[
+                `${t('id')}`,
+                `${t('Movie_en')}`,
+                `${t('Movie_ka')}`,
+                `${t('action')}`,
+              ]}
+            />
             <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
               {movies.map((movie) => (
                 <tr className='flex w-full bg-white' key={movie.id}>
