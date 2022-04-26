@@ -8,7 +8,7 @@ import App from 'App';
 import 'language/i18next';
 import 'index.css';
 
-axios.defaults.baseURL = 'http://localhost:8000/api/';
+axios.defaults.baseURL = process.env.REACT_APP_ENV_BACKEND_API;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
 axios.defaults.withCredentials = true;

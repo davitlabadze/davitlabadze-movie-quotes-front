@@ -42,7 +42,7 @@ function OneQuoteCard() {
             <div className='h-96'>
               <img
                 className='object-cover w-full h-full rounded-lg'
-                src={`http://localhost:8000/storage/${quote.thumbnail}`}
+                src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
                 alt='logo'
               />
             </div>

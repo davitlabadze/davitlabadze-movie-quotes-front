@@ -44,7 +44,7 @@ function Card() {
                 <div className=' h-96'>
                   <img
                     className='object-cover w-full h-full rounded'
-                    src={`http://localhost:8000/storage/${quote.thumbnail}`}
+                    src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
                     alt='img'
                   />
                 </div>

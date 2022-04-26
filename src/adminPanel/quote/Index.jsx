@@ -113,7 +113,7 @@ function Index() {
                     <img
                       className='ml-14 '
                       key={quote.id}
-                      src={`http://localhost:8000/storage/${quote.thumbnail}`}
+                      src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
                       width='64'
                       height='64'
                       alt='movie img'
