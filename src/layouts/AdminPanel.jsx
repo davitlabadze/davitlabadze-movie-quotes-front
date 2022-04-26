@@ -6,7 +6,7 @@ import Movie from 'adminPanel/img/movies.svg';
 import Quote from 'adminPanel/img/quotes.svg';
 import Logout from 'adminPanel/img/logout.svg';
 
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from 'components/adminPanelComponents/LanguageSwitcher';
@@ -43,9 +43,13 @@ function AdminPanel() {
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 {t('CORE')}
               </div>
-              <Link
+              <NavLink
                 to='/adminpanel/dashboard'
-                className='flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
+                className={({ isActive }) =>
+                  isActive
+                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
+                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                }
               >
                 <img
                   src={Home}
@@ -53,7 +57,7 @@ function AdminPanel() {
                   alt='home'
                 />
                 {t('Dashboard')}
-              </Link>
+              </NavLink>
               <Link
                 to='/'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
@@ -69,9 +73,13 @@ function AdminPanel() {
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 {t('INTERFACE')}
               </div>
-              <Link
+              <NavLink
                 to='/adminpanel/movies'
-                className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                className={({ isActive }) =>
+                  isActive
+                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
+                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                }
               >
                 <img
                   src={Movie}
@@ -79,11 +87,15 @@ function AdminPanel() {
                   alt='movies'
                 />
                 {t('Movies')}
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to='/adminpanel/quotes'
-                className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                className={({ isActive }) =>
+                  isActive
+                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
+                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
+                }
               >
                 <img
                   src={Quote}
@@ -91,7 +103,7 @@ function AdminPanel() {
                   alt='quotes'
                 />
                 {t('Quotes')}
-              </Link>
+              </NavLink>
             </nav>
           </div>
         </div>
