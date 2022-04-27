@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
 import TableThead from 'components/adminPanelComponents/TableThead';
+import Loading from 'components/Loading';
 function Index() {
   Title('AdminPanel | Movies');
   const { t } = useTranslation();
@@ -112,11 +113,7 @@ function Index() {
           {t('No information available')}
         </h1>
       )}
-      {isLoading && (
-        <h1 className='text-5xl text-center text-black py-96'>
-          {t('Loading')}...
-        </h1>
-      )}
+      {isLoading && <Loading />}
     </Fragment>
   );
 }

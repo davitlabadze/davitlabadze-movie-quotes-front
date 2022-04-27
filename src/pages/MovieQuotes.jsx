@@ -5,9 +5,10 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import Loading from 'components/Loading';
 
 function Card() {
-  const { t } = useTranslation();
+  useTranslation();
   const [quotes, setQuotes] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
@@ -56,11 +57,7 @@ function Card() {
           ))}
         </div>
       )}
-      {isLoading && (
-        <h1 className='text-5xl text-center text-white py-96'>
-          {t('Loading')}...
-        </h1>
-      )}
+      {isLoading && <Loading />}
     </Fragment>
   );
 }
