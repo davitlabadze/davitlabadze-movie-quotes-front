@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import Recent from 'adminPanel/img/recent.svg';
 import TableThead from 'components/adminPanelComponents/TableThead';
 
 const DashboardTable = (props) => {
   const { t } = useTranslation();
-
   const { data } = props;
 
   return (
-    <div>
+    <Fragment>
       <div className='flex py-3 mt-10 '>
         <img src={Recent} className='flex-shrink-0 w-6 h-6 mr-3' alt='recent' />
         {t('Recent Movies quotes')}
@@ -51,7 +50,7 @@ const DashboardTable = (props) => {
           ))}
         </tbody>
       </table>
-    </div>
+    </Fragment>
   );
 };
 

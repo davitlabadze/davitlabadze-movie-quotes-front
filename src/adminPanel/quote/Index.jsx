@@ -126,12 +126,12 @@ function Index() {
         </div>
       )}
       {!isLoading && !quotes && (
-        <h1 className='text-5xl text-center text-white py-96'>
+        <h1 className='text-5xl text-center text-black py-96'>
           {t('No information available')}
         </h1>
       )}
       {isLoading && (
-        <h1 className='text-5xl text-center text-white py-96'>
+        <h1 className='text-5xl text-center text-black py-96'>
           {t('Loading')}...
         </h1>
       )}
