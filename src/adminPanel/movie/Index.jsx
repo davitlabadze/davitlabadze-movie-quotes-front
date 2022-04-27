@@ -13,7 +13,7 @@ import NoInfromationAvailable from 'components/NoInfromationAvailable';
 function Index() {
   Title('AdminPanel | Movies');
   const { t } = useTranslation();
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getMovies();
@@ -53,7 +53,7 @@ function Index() {
 
   return (
     <Fragment>
-      {!isLoading && movies && (
+      {!isLoading && movies.length > 0 && (
         <div>
           <div className='flex p-2 mb-10 -mt-12'>
             <p className='flex p-2'>

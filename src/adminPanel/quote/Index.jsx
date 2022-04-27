@@ -15,7 +15,7 @@ import NoInfromationAvailable from 'components/NoInfromationAvailable';
 function Index() {
   Title('AdminPanel | Quotes');
   const { t } = useTranslation();
-  const [quotes, setQuotes] = useState();
+  const [quotes, setQuotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function Index() {
 
   return (
     <Fragment>
-      {!isLoading && quotes && (
+      {!isLoading && quotes.length > 0 && (
         <div>
           <div className='flex p-2 mb-10 -mt-12'>
             <p className='flex p-2'>
