@@ -1,0 +1,52 @@
+{
+    "Go to Adminpanel": "Go to Adminpanel",
+    "Authorization for the administrator": "Authorization for the administrator",
+    "No information available" : "No information available",
+    "email" : "email",
+    "password" : "password",
+    "Log In":"Log In",
+    "Log Out": "Log Out",
+    "Authorization":"Authorization",
+    "Back": "Back",
+    "Loading":"Loading",
+    "Recent Movies quotes":"Recent Movies quotes",
+    "Adminpanel":"Adminpanel",
+    "Dashboard": "Dashboard",
+    "View Website":"View Website",
+    "CORE":"CORE",
+    "INTERFACE":"INTERFACE",
+    "Movies":"Movies",
+    "Quotes":"Quotes",
+    "All Movies": "All Movies",
+    "Add Movie": "Add Movie",
+    "Edit Movie":"Edit Movie",
+    "All Quotes":"All Quotes",
+    "Add Quote": "Add Quote",
+    "Edit Quote":"Edit Quote",
+    "Create":"Create",
+    "Update": "Update",
+    "total" : "total",
+
+    "Value is required":"Value is required",
+    "The film is not selected" : "The film is not selected",
+
+    "The page you're looking for doesn't exist":"The page you're looking for doesn't exist",
+    "Oops!":"Oops!",
+    "Page not found":"Page not found",
+    "Return to the home page":"Return to the home page",
+    "The password is incorrect": "The password is incorrect",
+    "This user does not exist": "This user does not exist",
+
+    "Movie_en":"Movie title in English",
+    "Movie_ka":"Movie title in Georgia",
+    "Quote_en":"Quote in English",
+    "Quote_ka":"Quote in Georgia",
+    "image":"image",
+    "action": "action",
+
+    "Choose a movie": "Choose a movie"
+
+}
+
+
+

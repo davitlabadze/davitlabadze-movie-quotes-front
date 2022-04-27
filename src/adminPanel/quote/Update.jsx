@@ -102,7 +102,7 @@ function Update() {
                 className='block mb-2 text-xs font-bold text-gray-700 uppercase'
                 htmlFor='quote-en'
               >
-                Quote (EN)
+                {t('Quote_en')}
               </label>
               <input
                 className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -126,7 +126,7 @@ function Update() {
                 className='block mb-2 text-xs font-bold text-gray-700 uppercase'
                 htmlFor='quote-ka'
               >
-                Quote (KA)
+                {t('Quote_ka')}
               </label>
               <input
                 className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -144,6 +144,10 @@ function Update() {
                 </p>
               )}
             </div>
+            <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
+              {t('Choose a movie')}
+            </label>
+
             <div className='mb-6'>
               <select
                 className='
@@ -181,13 +185,12 @@ function Update() {
                 </p>
               )}
             </div>
-
             <div className='mb-6'>
               <label
                 className='block mb-2 text-xs font-bold text-gray-700 uppercase'
                 htmlFor='text'
               >
-                Image
+                {t('image')}
               </label>
               <input
                 className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'

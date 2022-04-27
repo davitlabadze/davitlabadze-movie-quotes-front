@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Loading from 'components/Loading';
 import NoInfromationAvailable from 'components/NoInfromationAvailable';
 
-function OneQuoteCard() {
+function SingleQuote() {
   useTranslation();
   const [quote, setQuote] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +21,11 @@ function OneQuoteCard() {
       await axios
         .get('get-quote')
         .then((res) => {
-          if (res.data) {
-            setQuote(res.data);
+          if (res.data.singleQuote) {
+            setQuote(res.data.singleQuote);
           } else {
+            console.log(res.data.singleQuote);
           }
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -68,4 +68,4 @@ function OneQuoteCard() {
   );
 }
 
-export default OneQuoteCard;
+export default SingleQuote;

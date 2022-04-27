@@ -96,7 +96,7 @@ function Dashboard() {
           <DashboardTable data={data.quotes} />
         </div>
       )}
-      {!isLoading && !data && <NoInfromationAvailable />}
+      {!isLoading && data.quotes.length === 0 && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );

@@ -55,22 +55,18 @@ function Index() {
 
   return (
     <Fragment>
+      <div className='flex p-2 mb-10 -mt-12'>
+        <p className='flex p-2'>
+          <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
+          {t('All Quotes')}
+        </p>
+        <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
+          <img src={Plus} className='w-6 h-6' alt='plus' />
+          <Link to='create-quote'>{t('Add Quote')}</Link>
+        </button>
+      </div>
       {!isLoading && quotes.length > 0 && (
         <div>
-          <div className='flex p-2 mb-10 -mt-12'>
-            <p className='flex p-2'>
-              <img
-                className='flex-shrink-0 w-6 h-6 mr-3'
-                src={Table}
-                alt='table'
-              />
-              {t('All Quotes')}
-            </p>
-            <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
-              <img src={Plus} className='w-6 h-6' alt='plus' />
-              <Link to='create-quote'>{t('Add Quote')}</Link>
-            </button>
-          </div>
           <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
             <TableThead
               title={[
@@ -128,7 +124,7 @@ function Index() {
           </table>
         </div>
       )}
-      {!isLoading && !quotes && <NoInfromationAvailable />}
+      {!isLoading && quotes.length === 0 && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );

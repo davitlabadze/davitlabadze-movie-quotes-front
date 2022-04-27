@@ -89,7 +89,7 @@ function Update() {
                 className='block mb-2 text-xs font-bold text-gray-700 uppercase'
                 htmlFor='movie-en'
               >
-                Movie (EN)
+                {t('Movie_en')}
               </label>
               <input
                 className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -114,7 +114,7 @@ function Update() {
                 className='block mb-2 text-xs font-bold text-gray-700 uppercase'
                 htmlFor='movie-ka'
               >
-                Movie (KA)
+                {t('Movie_ka')}
               </label>
               <input
                 className={`w-full p-2 border border-gray-400 rounded outline-none ${

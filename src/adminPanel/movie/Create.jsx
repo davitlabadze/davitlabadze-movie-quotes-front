@@ -66,9 +66,9 @@ function Create() {
         <div className='mb-6'>
           <label
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-            htmlFor='movie_{{ $locale }}'
+            htmlFor='movie_en'
           >
-            Movie_EN
+            {t('Movie_en')}
           </label>
           <input
             className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -91,7 +91,7 @@ function Create() {
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
             htmlFor='movie_ka'
           >
-            Movie_KA
+            {t('Movie_ka')}
           </label>
           <input
             className={`w-full p-2 border border-gray-400 rounded outline-none ${

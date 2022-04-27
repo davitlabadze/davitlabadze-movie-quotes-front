@@ -97,7 +97,7 @@ function Create() {
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
             htmlFor='quote-en'
           >
-            Quotes (EN)
+            {t('Quote_en')}
           </label>
           <input
             className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -120,7 +120,7 @@ function Create() {
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
             htmlFor='quote-ka'
           >
-            Quotes (KA)
+            {t('Quote_ka')}
           </label>
           <input
             className={`w-full p-2 border border-gray-400 rounded outline-none ${
@@ -137,7 +137,9 @@ function Create() {
             </p>
           )}
         </div>
-
+        <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
+          {t('Choose a movie')}
+        </label>
         <div className='mb-6'>
           <select
             className='
@@ -180,7 +182,7 @@ function Create() {
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
             htmlFor='text'
           >
-            Image
+            {t('image')}
           </label>
           <input
             className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
