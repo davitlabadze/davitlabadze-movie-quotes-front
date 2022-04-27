@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
 import TableThead from 'components/adminPanelComponents/TableThead';
 import Loading from 'components/Loading';
+import NoInfromationAvailable from 'components/NoInfromationAvailable';
 function Index() {
   Title('AdminPanel | Movies');
   const { t } = useTranslation();
@@ -108,11 +109,7 @@ function Index() {
           </table>
         </div>
       )}
-      {!isLoading && !movies && (
-        <h1 className='text-5xl text-center text-black py-96'>
-          {t('No information available')}
-        </h1>
-      )}
+      {!isLoading && !movies && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );

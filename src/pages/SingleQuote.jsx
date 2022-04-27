@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import Loading from 'components/Loading';
+import NoInfromationAvailable from 'components/NoInfromationAvailable';
 
 function OneQuoteCard() {
-  const { t } = useTranslation();
+  useTranslation();
   const [quote, setQuote] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -61,11 +62,7 @@ function OneQuoteCard() {
           </div>
         </div>
       )}
-      {!isLoading && !quote && (
-        <h1 className='text-5xl text-center text-white py-96'>
-          {t('No information available')}
-        </h1>
-      )}
+      {!isLoading && !quote && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );

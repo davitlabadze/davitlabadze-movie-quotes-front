@@ -10,13 +10,13 @@ import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
 import TableThead from 'components/adminPanelComponents/TableThead';
 import Loading from 'components/Loading';
+import NoInfromationAvailable from 'components/NoInfromationAvailable';
 
 function Index() {
   Title('AdminPanel | Quotes');
   const { t } = useTranslation();
   const [quotes, setQuotes] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  console.log(quotes);
 
   useEffect(() => {
     getQuotes();
@@ -128,11 +128,7 @@ function Index() {
           </table>
         </div>
       )}
-      {!isLoading && !quotes && (
-        <h1 className='text-5xl text-center text-black py-96'>
-          {t('No information available')}
-        </h1>
-      )}
+      {!isLoading && !quotes && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );

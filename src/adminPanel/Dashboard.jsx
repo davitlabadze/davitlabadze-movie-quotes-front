@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Title from 'components/Title';
 import { useTranslation } from 'react-i18next';
 import Loading from 'components/Loading';
+import NoInfromationAvailable from 'components/NoInfromationAvailable';
 
 function Dashboard() {
   Title('AdminPanel | Dashboard');
@@ -95,11 +96,7 @@ function Dashboard() {
           <DashboardTable data={data.quotes} />
         </div>
       )}
-      {!isLoading && !data && (
-        <h1 className='text-5xl text-center text-black py-96'>
-          {t('No information available')}
-        </h1>
-      )}
+      {!isLoading && !data && <NoInfromationAvailable />}
       {isLoading && <Loading />}
     </Fragment>
   );
