@@ -57,13 +57,15 @@ function Create() {
   const createQuote = async (data) => {
     try {
       const formData = new FormData();
-      formData.append('quote-en', data.quoteEn);
-      formData.append('quote-ka', data.quoteKa);
-      formData.append('movie-id', data.movieId);
+      formData.append('quote[en]', data.quoteEn);
+      formData.append('quote[ka]', data.quoteKa);
+      formData.append('movie_id', data.movieId);
       formData.append('thumbnail', data.image[0]);
+
       await axios
         .post('quotes/create', formData)
         .then((res) => {
+          console.log(data);
           setMessage('successfully!');
         })
         .catch((err) => console.log(err));
@@ -188,7 +190,7 @@ function Create() {
             className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
             type='file'
             name='image'
-            {...register('image', { required: emptyValue })}
+            {...register('image', { required: emptySelect })}
           />
           {errors.image && (
             <p className='mt-2 text-xs text-red-500'>{errors.image.message}</p>

@@ -16,6 +16,7 @@ function Update() {
   const [quote, setQuote] = useState();
   const [message, setMessage] = useState('');
   const [movies, setMovie] = useState([]);
+  const [defImage, setDefImage] = useState('');
 
   const {
     register,
@@ -33,6 +34,8 @@ function Update() {
         .get(`quotes/${params.quoteId}/edit`)
         .then((res) => {
           setQuote(res.data);
+          console.log(res.data.quote.thumbnail);
+          setDefImage(res.data.quote.thumbnail);
           setID(res.data.quote.id);
           setValue('quoteEn', res.data.quote.quote.en);
           setValue('quoteKa', res.data.quote.quote.ka);
@@ -56,15 +59,19 @@ function Update() {
   const updateQuote = async (data) => {
     const formData = new FormData();
     formData.append('_method', 'PUT');
-    formData.append('thumbnail', data.image[0]);
-    formData.append('movie-id', data.movieId);
-    formData.append('quote-en', data.quoteEn);
-    formData.append('quote-ka', data.quoteKa);
+    if (data.image[0]) {
+      formData.append('thumbnail', data.image[0]);
+    }
+    formData.append('movie_id', data.movieId);
+    formData.append('quote[en]', data.quoteEn);
+    formData.append('quote[ka]', data.quoteKa);
     try {
       await axios(`quotes/${id}/update`, {
         data: formData,
         method: 'POST',
-      }).then((res) => setMessage('successfully!'));
+      })
+        .then(() => setMessage('successfully!'))
+        .catch((err) => console.log(err));
     } catch (error) {
       throw new Error('Error');
     }
@@ -185,24 +192,26 @@ function Update() {
                 </p>
               )}
             </div>
-            <div className='mb-6'>
-              <label
-                className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-                htmlFor='text'
-              >
-                {t('image')}
-              </label>
-              <input
-                className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                type='file'
-                name='image'
-                {...register('image', { required: emptyValueMessage })}
+            <div className='flex mb-6'>
+              <div>
+                <label
+                  className='block mb-2 text-xs font-bold text-gray-700 uppercase'
+                  htmlFor='text'
+                >
+                  {t('image')}
+                </label>
+                <input
+                  className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
+                  type='file'
+                  name='image'
+                  {...register('image')}
+                />
+              </div>
+              <img
+                src={`${process.env.REACT_APP_ENV_IMAGE}${defImage}`}
+                alt='default'
+                className='w-20 h-auto ml-10 rounded-lg'
               />
-              {errors.image && (
-                <p className='mt-2 text-xs text-red-500'>
-                  {errors.image.message}
-                </p>
-              )}
             </div>
             <div className='flex mb-6 w-min'>
               <div className='flex mb-6 w-min'>
