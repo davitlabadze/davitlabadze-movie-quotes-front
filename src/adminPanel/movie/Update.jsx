@@ -49,12 +49,15 @@ function Update() {
   }, [message, getMovie]);
 
   const updateMovie = async (data) => {
+    const formData = new FormData();
+    formData.append('_method', 'PUT');
+    formData.append('movie[en]', data.movieEn);
+    formData.append('movie[ka]', data.movieKa);
     try {
-      await axios
-        .put(`movies/${id}/update`, {
-          'movie-en': data.movieEn,
-          'movie-ka': data.movieKa,
-        })
+      await axios(`movies/${id}/update`, {
+        data: formData,
+        method: 'POST',
+      })
         .then((res) => {
           setMessage('successfully!');
         })

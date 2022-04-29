@@ -35,11 +35,11 @@ function Create() {
 
   const createMovie = async (data) => {
     try {
+      const formData = new FormData();
+      formData.append('movie[en]', data.movieEn);
+      formData.append('movie[ka]', data.movieKa);
       await axios
-        .post('movies/create', {
-          'movie-en': data.movieEn,
-          'movie-ka': data.movieKa,
-        })
+        .post('movies/create', formData)
         .then((res) => {
           setMessage('successfully!');
         })
