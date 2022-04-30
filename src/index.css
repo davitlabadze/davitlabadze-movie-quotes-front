@@ -37,3 +37,8 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #808189;
 }
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(55 65 81 / 1);
+  border-radius: 100vh;
+}

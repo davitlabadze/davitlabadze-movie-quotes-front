@@ -1,13 +1,12 @@
-import Table from 'adminPanel/img/table.svg';
-import Eye from 'adminPanel/img/eye.svg';
+import { TableIcon, EyeIcon } from '@heroicons/react/outline';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
 import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import Title from 'components/Title';
+import Nameless from 'components/adminPanelComponents/Nameless';
 function Create() {
   Title('Movie | Create');
   const { t } = useTranslation();
@@ -52,16 +51,13 @@ function Create() {
   const emptyValue = `${t('Value is required')}`;
   return (
     <div>
-      <div className='flex p-2 mb-10 -mt-12'>
-        <p className='flex p-2'>
-          <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
-          {t('Add Movie')}
-        </p>
-        <button className='flex p-2 text-white bg-gray-500 hover:bg-gray-600 rounded-xl'>
-          <img className='w-6 h-6' src={Eye} alt='eye' />
-          <Link to={'/adminpanel/movies'}>{t('All Movies')}</Link>
-        </button>
-      </div>
+      <Nameless
+        icon={<TableIcon />}
+        btnIcon={<EyeIcon />}
+        title='Add Movie'
+        path='/adminpanel/movies'
+        action='All Movies'
+      />
       <form onSubmit={handleSubmit(createMovie)} className='mt-10'>
         <div className='mb-6'>
           <label
@@ -71,7 +67,7 @@ function Create() {
             {t('Movie_en')}
           </label>
           <input
-            className={`w-full p-2 border border-gray-400 rounded outline-none ${
+            className={`w-full p-2 border dark:border-slate-700 border-gray-400 dark:bg-slate-800 dark:text-slate-600 rounded outline-none ${
               errors.movieEn && 'w-full p-2 border-2 border-red-700 rounded'
             }`}
             type='text'
@@ -94,7 +90,7 @@ function Create() {
             {t('Movie_ka')}
           </label>
           <input
-            className={`w-full p-2 border border-gray-400 rounded outline-none ${
+            className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
               errors.movieKa && 'w-full p-2 border-2 border-red-700 rounded'
             }`}
             type='text'

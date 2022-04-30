@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import Table from 'adminPanel/img/table.svg';
-import Plus from 'adminPanel/img/plus.svg';
-import Pen from 'adminPanel/img/pen.svg';
-import Delete from 'adminPanel/img/delete.svg';
+import {
+  TableIcon,
+  PlusIcon,
+  PencilIcon,
+  TrashIcon,
+} from '@heroicons/react/outline';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +13,7 @@ import Title from 'components/Title';
 import TableThead from 'components/adminPanelComponents/TableThead';
 import Loading from 'components/Loading';
 import NoInfromationAvailable from 'components/NoInfromationAvailable';
+import Nameless from 'components/adminPanelComponents/Nameless';
 
 function Index() {
   Title('AdminPanel | Quotes');
@@ -55,19 +58,16 @@ function Index() {
 
   return (
     <Fragment>
-      <div className='flex p-2 mb-10'>
-        <p className='flex p-2'>
-          <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
-          {t('All Quotes')}
-        </p>
-        <button className='flex p-2 text-white bg-green-500 hover:bg-green-600 rounded-xl'>
-          <img src={Plus} className='w-6 h-6' alt='plus' />
-          <Link to='create-quote'>{t('Add Quote')}</Link>
-        </button>
-      </div>
+      <Nameless
+        icon={<TableIcon />}
+        btnIcon={<PlusIcon />}
+        title='All Quotes'
+        path='create-quote'
+        action='Add Quote'
+      />
       {!isLoading && quotes.length > 0 && (
         <div>
-          <table className='w-full text-center divide-y divide-gray-200 rounded-t-lg shadow-md'>
+          <table className='w-full text-center divide-y divide-gray-200 shadow-md dark:divide-slate-700 '>
             <TableThead
               title={[
                 `${t('id')}`,
@@ -79,23 +79,28 @@ function Index() {
                 `${t('action')}`,
               ]}
             />
-            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white rounded-b-lg h-96 '>
+            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white dark:bg-slate-800 rounded-b-md h-96 '>
               {quotes.map((quote) => (
-                <tr className='flex w-full bg-white' key={quote.id}>
-                  <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>
-                  <td className='w-1/4 p-4 px-6 text-gray-500'>
+                <tr
+                  className='flex w-full bg-white dark:bg-slate-800'
+                  key={quote.id}
+                >
+                  <td className='w-1/4 p-4 px-6 text-gray-900 dark:text-slate-600'>
+                    {quote.id}
+                  </td>
+                  <td className='w-1/4 p-4 px-6 text-gray-500 dark:text-slate-600'>
                     {quote.movie.movie.en}
                   </td>
-                  <td className='w-1/4 p-4 px-6 text-gray-500'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500 dark:text-slate-600'>
                     {quote.movie.movie.ka}
                   </td>
-                  <td className='w-1/4 p-4 px-6 text-gray-500'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500 dark:text-slate-600'>
                     {quote.quote.en}
                   </td>
-                  <td className='w-1/4 p-4 px-6 text-gray-500'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500 dark:text-slate-600'>
                     {quote.quote.ka}
                   </td>
-                  <td className='w-1/4 p-4 px-6 text-gray-500'>
+                  <td className='w-1/4 p-4 px-6 text-gray-500 dark:text-slate-600'>
                     <img
                       className='ml-14 '
                       key={quote.id}
@@ -108,14 +113,14 @@ function Index() {
                   <td className='w-1/4 p-4 px-6 text-center '>
                     <Link to={`/adminpanel/quotes/${quote.id}/edit`}>
                       <button className='ml-4'>
-                        <img src={Pen} className='w-6 h-6' alt='edit-pen' />
+                        <PencilIcon className='w-6 h-6 dark:text-slate-600 hover:dark:text-slate-700' />
                       </button>
                     </Link>
                     <button
                       onClick={() => deleteQuote(quote.id)}
                       className='ml-2'
                     >
-                      <img src={Delete} className='w-6 h-6' alt='delete' />
+                      <TrashIcon className='w-6 h-6 dark:text-slate-600' />
                     </button>
                   </td>
                 </tr>
