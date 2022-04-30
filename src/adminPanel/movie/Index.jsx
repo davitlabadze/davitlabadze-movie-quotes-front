@@ -53,7 +53,7 @@ function Index() {
 
   return (
     <Fragment>
-      <div className='flex p-2 mb-10 -mt-12'>
+      <div className='flex p-2 mb-10'>
         <p className='flex p-2'>
           <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
           {t('All Movies')}
@@ -66,7 +66,7 @@ function Index() {
       </div>
       {!isLoading && movies.length > 0 && (
         <div>
-          <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
+          <table className='w-full text-center divide-y divide-gray-200 shadow-md'>
             <TableThead
               title={[
                 `${t('id')}`,
@@ -75,7 +75,7 @@ function Index() {
                 `${t('action')}`,
               ]}
             />
-            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
+            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white rounded-md h-96 '>
               {movies.map((movie) => (
                 <tr className='flex w-full bg-white' key={movie.id}>
                   <td className='w-1/4 p-4 px-6 text-gray-900'>{movie.id}</td>

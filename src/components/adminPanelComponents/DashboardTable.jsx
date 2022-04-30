@@ -9,11 +9,11 @@ const DashboardTable = (props) => {
 
   return (
     <Fragment>
-      <div className='flex py-3 mt-10 '>
+      <div className='flex py-3 mt-10'>
         <img src={Recent} className='flex-shrink-0 w-6 h-6 mr-3' alt='recent' />
         {t('Recent Movies quotes')}
       </div>
-      <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
+      <table className='w-full text-center divide-y divide-gray-200 rounded-lg shadow-md'>
         <TableThead
           title={[
             `${t('id')}`,
@@ -24,7 +24,7 @@ const DashboardTable = (props) => {
             `${t('image')}`,
           ]}
         />
-        <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
+        <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white rounded-b-lg h-96 '>
           {data.map((quote) => (
             <tr className='flex w-full bg-white' key={quote.id}>
               <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>

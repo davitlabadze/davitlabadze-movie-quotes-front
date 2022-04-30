@@ -1,7 +1,7 @@
 const TableThead = (props) => {
   const { title } = props;
   return (
-    <thead className='flex w-full text-white bg-gray-50'>
+    <thead className='flex w-full text-white rounded-t-lg bg-gray-50'>
       <tr className='flex w-full mb-2'>
         {title.map((title) => (
           <th

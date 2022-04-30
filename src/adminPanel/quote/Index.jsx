@@ -55,7 +55,7 @@ function Index() {
 
   return (
     <Fragment>
-      <div className='flex p-2 mb-10 -mt-12'>
+      <div className='flex p-2 mb-10'>
         <p className='flex p-2'>
           <img className='flex-shrink-0 w-6 h-6 mr-3' src={Table} alt='table' />
           {t('All Quotes')}
@@ -67,7 +67,7 @@ function Index() {
       </div>
       {!isLoading && quotes.length > 0 && (
         <div>
-          <table className='w-full text-center divide-y divide-gray-200 rounded-md drop-shadow-md'>
+          <table className='w-full text-center divide-y divide-gray-200 rounded-t-lg shadow-md'>
             <TableThead
               title={[
                 `${t('id')}`,
@@ -79,7 +79,7 @@ function Index() {
                 `${t('action')}`,
               ]}
             />
-            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll h-96 '>
+            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white rounded-b-lg h-96 '>
               {quotes.map((quote) => (
                 <tr className='flex w-full bg-white' key={quote.id}>
                   <td className='w-1/4 p-4 px-6 text-gray-900'>{quote.id}</td>

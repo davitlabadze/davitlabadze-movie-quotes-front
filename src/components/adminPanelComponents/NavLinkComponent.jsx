@@ -12,8 +12,8 @@ const NavLinkComponent = (props) => {
       to={path}
       className={({ isActive }) =>
         isActive
-          ? 'flex items-center px-2 py-2 text-sm font-medium  text-red-500 shadow-lg shadow-gray-500/40 bg-gray-100 rounded-md group '
-          : 'flex items-center px-2 py-2 text-sm font-medium text-gray-200 rounded-md hover:shadow-lg shadow-indigo-500/40  hover:text-black group'
+          ? 'flex items-center px-2 py-2 text-sm font-medium  text-gray-800 shadow-lg shadow-gray-500/50 bg-gray-300 rounded-md  '
+          : 'flex items-center px-2 py-2 text-sm font-medium text-gray-700 rounded-md hover:shadow-lg shadow-gray-500/50 hover:text-black '
       }
     >
       <div className='flex-shrink-0 w-6 h-6 mr-3'>{icon}</div>
