@@ -1,19 +1,22 @@
 import React from 'react';
+import {
+  TemplateIcon,
+  GlobeAltIcon,
+  FilmIcon,
+  BookOpenIcon,
+  LogoutIcon,
+} from '@heroicons/react/outline';
 
-import Home from 'adminPanel/img/home.svg';
-import Global from 'adminPanel/img/global.svg';
-import Movie from 'adminPanel/img/movies.svg';
-import Quote from 'adminPanel/img/quotes.svg';
-import Logout from 'adminPanel/img/logout.svg';
-
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from 'components/adminPanelComponents/LanguageSwitcher';
+import useDarkMode from 'hooks/useDarkMode';
+import NavLinkComponent from 'components/adminPanelComponents/NavLinkComponent';
 
 function AdminPanel() {
+  useDarkMode();
   const { t } = useTranslation();
-
   const navigate = useNavigate();
   const logoutSubmit = async (e) => {
     e.preventDefault();
@@ -33,84 +36,50 @@ function AdminPanel() {
   };
   return (
     <div>
-      <div className='hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
-        <div className='flex flex-col flex-1 min-h-0 bg-gray-800'>
+      <div className='hidden border-r md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
+        <div className='flex flex-col flex-1 min-h-0'>
           <div className='flex items-center flex-shrink-0 h-16 px-4 bg-gray-900'>
             <h1 className='text-xl font-bold text-white'>{t('Adminpanel')}</h1>
           </div>
-          <div className='flex flex-col flex-1 overflow-y-auto'>
+          <div className='flex flex-col flex-1 overflow-hidden '>
             <nav className='flex-1 px-2 py-4 space-y-1'>
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 {t('CORE')}
               </div>
-              <NavLink
-                to='/adminpanel/dashboard'
-                className={({ isActive }) =>
-                  isActive
-                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
-                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
-                }
-              >
-                <img
-                  src={Home}
-                  className='flex-shrink-0 w-6 h-6 mr-3'
-                  alt='home'
-                />
-                {t('Dashboard')}
-              </NavLink>
+
+              <NavLinkComponent
+                path='/adminpanel/dashboard'
+                icon={<TemplateIcon />}
+                title='Dashboard'
+              />
               <Link
                 to='/'
                 className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
                 target='_blank'
               >
-                <img
-                  src={Global}
-                  className='flex-shrink-0 w-6 h-6 mr-3'
-                  alt='global'
-                />
+                <GlobeAltIcon className='flex-shrink-0 w-6 h-6 mr-3' />
                 {t('View Website')}
               </Link>
               <div className='flex items-center px-2 py-2 text-sm font-medium text-gray-500'>
                 {t('INTERFACE')}
               </div>
-              <NavLink
-                to='/adminpanel/movies'
-                className={({ isActive }) =>
-                  isActive
-                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
-                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
-                }
-              >
-                <img
-                  src={Movie}
-                  className='flex-shrink-0 w-6 h-6 mr-3'
-                  alt='movies'
-                />
-                {t('Movies')}
-              </NavLink>
-
-              <NavLink
-                to='/adminpanel/quotes'
-                className={({ isActive }) =>
-                  isActive
-                    ? 'flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group'
-                    : 'flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group'
-                }
-              >
-                <img
-                  src={Quote}
-                  className='flex-shrink-0 w-6 h-6 mr-3'
-                  alt='quotes'
-                />
-                {t('Quotes')}
-              </NavLink>
+              <NavLinkComponent
+                path='/adminpanel/movies'
+                icon={<FilmIcon />}
+                title='Movies'
+              />
+              <NavLinkComponent
+                path='/adminpanel/quotes'
+                icon={<BookOpenIcon />}
+                title='Quotes'
+              />
             </nav>
           </div>
         </div>
       </div>
-      <div className='flex flex-col md:pl-64'>
+      <div className='flex flex-col md:pl-64 '>
         <div className='sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow'>
-          <div className='flex justify-between flex-1 px-4 bg-green-500'>
+          <div className='flex justify-between flex-1 px-4 bg-white'>
             <div className='flex flex-1 mt-4 font-bold text-gray-900 '>
               {t('Dashboard')}
             </div>
@@ -123,11 +92,7 @@ function AdminPanel() {
                     className='flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md bg-slate-800 hover:bg-gray-900 hover:text-white group'
                     onClick={logoutSubmit}
                   >
-                    <img
-                      src={Logout}
-                      className='flex-shrink-0 w-6 h-6 text-gray-500 '
-                      alt='logout'
-                    />
+                    <LogoutIcon className='flex-shrink-0 w-6 h-6 text-gray-500' />
                     {t('Log Out')}
                   </button>
                 </div>
@@ -135,7 +100,7 @@ function AdminPanel() {
             </div>
           </div>
         </div>
-        <main className='w-full p-16 mx-auto mt-2 bg-gray-100 border border-gray-200 rounded-xl'>
+        <main className='w-full p-16 mx-auto mt-2'>
           <div className='w-full'>
             <Outlet />
           </div>
