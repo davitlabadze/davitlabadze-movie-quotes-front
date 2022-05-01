@@ -11,11 +11,12 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from 'components/adminPanelComponents/LanguageSwitcher';
-import useDarkMode from 'hooks/useDarkMode';
+// import useDarkMode from 'hooks/useDarkSide';
 import NavLinkComponent from 'components/adminPanelComponents/NavLinkComponent';
+import ThemeSwitcher from 'components/ThemeSwitcher';
 
 function AdminPanel() {
-  useDarkMode();
+  // useDarkMode();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const logoutSubmit = async (e) => {
@@ -80,10 +81,11 @@ function AdminPanel() {
       <div className='flex flex-col md:pl-64 '>
         <div className='flex flex-shrink-0 h-16'>
           <div className='flex justify-end flex-1 px-16 bg-white shadow dark:bg-slate-800'>
-            {/* <div className='flex flex-1 mt-4 font-bold text-black '>
-              {t('Dashboard')}
-            </div> */}
+            <div className='flex flex-1 mt-4 font-bold text-black '>
+              {/* <button onClick={() => setEnabled('dark')}>dark mode</button> */}
+            </div>
             <div className='flex items-center md:ml-6'>
+              <ThemeSwitcher />
               <LanguageSwitcher />
               <div className='relative ml-3'>
                 <div>
