@@ -1,4 +1,4 @@
-import spiner from 'adminPanel/img/spiner.svg';
+import spiner from 'components/img/spiner.svg';
 const Loading = () => {
   return (
     <div className='flex items-center justify-center pt-72'>
