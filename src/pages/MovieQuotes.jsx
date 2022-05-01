@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import Loading from 'components/Loading';
+import Loading from 'components/frontendComponents/Loading';
 
 function Card() {
   useTranslation();

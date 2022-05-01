@@ -3,8 +3,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import DashboardTable from 'components/adminPanelComponents/DashboardTable';
 import Title from 'components/Title';
 import { useTranslation } from 'react-i18next';
-import Loading from 'components/Loading';
-import NoInfromationAvailable from 'components/NoInfromationAvailable';
+import Loading from 'components/adminPanelComponents/Loading';
+import NoInfromationAvailable from 'components/adminPanelComponents/NoInfromationAvailable';
 import DashboardCard from 'components/adminPanelComponents/DashboardCard';
 import { FilmIcon, BookOpenIcon } from '@heroicons/react/outline';
 function Dashboard() {

@@ -12,8 +12,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Title from 'components/Title';
 import TableThead from 'components/adminPanelComponents/TableThead';
-import Loading from 'components/Loading';
-import NoInfromationAvailable from 'components/NoInfromationAvailable';
+import Loading from 'components/adminPanelComponents/Loading';
+import NoInfromationAvailable from 'components/adminPanelComponents/NoInfromationAvailable';
 import Nameless from 'components/adminPanelComponents/Nameless';
 function Index() {
   Title('AdminPanel | Movies');

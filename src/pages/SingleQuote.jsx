@@ -3,8 +3,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import Loading from 'components/Loading';
-import NoInfromationAvailable from 'components/NoInfromationAvailable';
+import Loading from 'components/frontendComponents/Loading';
+import NoInfromationAvailable from 'components/frontendComponents/NoInfromationAvailable';
 
 function SingleQuote() {
   useTranslation();
