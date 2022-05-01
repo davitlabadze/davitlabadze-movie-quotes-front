@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-
+import i18n from 'i18next';
 import {
   TableIcon,
   PlusIcon,
@@ -20,6 +20,7 @@ function Index() {
   const { t } = useTranslation();
   const [quotes, setQuotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getQuotes();
@@ -56,6 +57,15 @@ function Index() {
     }
   };
 
+  const filteredCountries = quotes.filter((quote) => {
+    return (
+      quote.quote[i18n.language].toLowerCase().includes(search.toLowerCase()) ||
+      quote.movie.movie[i18n.language]
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
+  });
+
   return (
     <Fragment>
       <Nameless
@@ -65,22 +75,33 @@ function Index() {
         path='create-quote'
         action='Add Quote'
       />
-      {!isLoading && quotes.length > 0 && (
-        <div>
-          <table className='w-full text-center divide-y divide-gray-200 shadow-md dark:divide-slate-700 '>
-            <TableThead
-              title={[
-                `${t('id')}`,
-                `${t('Movie_en')}`,
-                `${t('Movie_ka')}`,
-                `${t('Quote_en')}`,
-                `${t('Quote_ka')}`,
-                `${t('image')}`,
-                `${t('action')}`,
-              ]}
-            />
-            <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white dark:bg-slate-800 rounded-b-md h-96 '>
-              {quotes.map((quote) => (
+      <div className='mt-20'>
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          name='search'
+          type='search'
+          id='search'
+          placeholder='Search by movie or quote'
+          className='p-2 px-12 mb-4 bg-no-repeat rounded-lg shadow-sm outline-none dark:bg-slate-800 dark:text-slate-500 bg bg-left-1 bg-search'
+        />
+      </div>
+      <div>
+        <table className='w-full text-center divide-y divide-gray-200 shadow-md dark:divide-slate-700 '>
+          <TableThead
+            title={[
+              `${t('id')}`,
+              `${t('Movie_en')}`,
+              `${t('Movie_ka')}`,
+              `${t('Quote_en')}`,
+              `${t('Quote_ka')}`,
+              `${t('image')}`,
+              `${t('action')}`,
+            ]}
+          />
+          <tbody className='flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll bg-white dark:bg-slate-800 rounded-b-md h-96 '>
+            {!isLoading &&
+              quotes.length > 0 &&
+              filteredCountries.map((quote) => (
                 <tr
                   className='flex w-full bg-white dark:bg-slate-800'
                   key={quote.id}
@@ -125,12 +146,11 @@ function Index() {
                   </td>
                 </tr>
               ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {!isLoading && quotes.length === 0 && <NoInfromationAvailable />}
-      {isLoading && <Loading />}
+            {!isLoading && quotes.length === 0 && <NoInfromationAvailable />}
+            {isLoading && <Loading />}
+          </tbody>
+        </table>
+      </div>
     </Fragment>
   );
 }
