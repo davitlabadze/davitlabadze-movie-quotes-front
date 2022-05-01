@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 const DashboardCard = (props) => {
   const { t } = useTranslation();
-  const { icon, path, data, color } = props;
+  const { icon, path, name, data, color } = props;
   return (
     <div
       className={`relative flex items-center px-6 py-5 space-x-3 rounded-lg shadow-sm ${color}`}
@@ -13,7 +13,7 @@ const DashboardCard = (props) => {
       <div className='flex-1 min-w-0'>
         <Link to={path}>
           <h3 className='focus:outline-none'>
-            <p className='text-sm font-medium text-white'>{t('All Quotes')}</p>
+            <p className='text-sm font-medium text-white'>{t(name)}</p>
             <p className='text-sm text-white truncate'>
               {t('total')}: {data}
             </p>
