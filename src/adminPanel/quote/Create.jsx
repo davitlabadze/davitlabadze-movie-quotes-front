@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
@@ -11,7 +10,6 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function Create() {
   Title('Quote | Create');
-  const [message, setMessage] = useState('');
   const { t } = useTranslation();
   const {
     register,
@@ -32,6 +30,23 @@ function Create() {
   const emptySelectMessage = `${t('The film is not selected')}`;
   const emptyImageMessage = `${t('No_image_chosen')}`;
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      const div = document.getElementById('filereaderimage');
+      div.remove();
+      reset({
+        quoteEn: '',
+        quoteKa: '',
+        movieId: '',
+        image: '',
+      });
+    }
+  }, [formState, reset]);
+
+  useEffect(() => {
+    getMovie();
+  }, []);
+
   const imageHandler = (e) => {
     if (e) {
       const File = e[0];
@@ -47,22 +62,6 @@ function Create() {
       }
     }
   };
-
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      setMessage('');
-      reset({
-        quoteEn: '',
-        quoteKa: '',
-        movieId: '',
-        image: '',
-      });
-    }
-  }, [formState, reset]);
-
-  useEffect(() => {
-    getMovie();
-  }, []);
 
   const getMovie = async () => {
     try {
@@ -241,7 +240,7 @@ function Create() {
                     {...register('image', { required: emptyImageMessage })}
                   />
 
-                  <div className='z-10 w-auto h-auto'>
+                  <div className='z-10 w-auto h-auto' id='filereaderimage'>
                     {movieQuoteImg && (
                       <img
                         className='w-full h-full'
@@ -258,8 +257,7 @@ function Create() {
 
         <div className='flex mb-6 w-min'>
           <div className='flex mb-6 w-min'>
-            <Button flash={message} title='Create' />
-            <FlashMessage flash={message} />
+            <Button title='Create' />
           </div>
         </div>
       </form>
