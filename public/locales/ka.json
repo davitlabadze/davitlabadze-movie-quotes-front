@@ -47,8 +47,10 @@
 
     "failed_to_create": "დამატება ვერ მოხერხდა",
     "failed_to_update": "განახლება ვერ მოხერხდა",
+    "failed_to_delete": "არ წაიშალა",
     "successfully_created!":"წარმატებით დაემატა!",
     "successfully_updated!":"წარმტებით განახლდა!",
+    "successfully_Deleted!":"წარმატებით წაიშალა!",
     "Choose a movie": "აირჩიე ფილმი",
     "network_error":"ქსელის შეცდომა",
     "method_not_allowed":"მეთოდი დაუშვებელია"

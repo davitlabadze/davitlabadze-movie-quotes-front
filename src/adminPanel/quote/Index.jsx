@@ -14,6 +14,7 @@ import TableThead from 'components/adminPanelComponents/TableThead';
 import Loading from 'components/adminPanelComponents/Loading';
 import NoInfromationAvailable from 'components/adminPanelComponents/NoInfromationAvailable';
 import Nameless from 'components/adminPanelComponents/Nameless';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Index() {
   Title('AdminPanel | Quotes');
@@ -42,15 +43,24 @@ function Index() {
     }
     setIsLoading(false);
   };
+  const errorMessage = `${t('failed_to_delete')}`;
+  const successfullyMessage = `${t('successfully_Deleted!')}`;
   const deleteQuote = async (id) => {
     try {
       await axios
         .delete(`quotes/${id}`)
         .then((res) => {
           getQuotes();
+          toast.success(successfullyMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          toast.error(errorMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
         });
     } catch (err) {
       console.error(err);
@@ -68,6 +78,7 @@ function Index() {
 
   return (
     <Fragment>
+      <Toaster />
       <Nameless
         icon={<TableIcon />}
         btnIcon={<PlusIcon />}

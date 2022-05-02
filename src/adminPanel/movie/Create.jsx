@@ -48,7 +48,6 @@ function Create() {
           });
         })
         .catch((error) => {
-          console.log(error.response);
           if (error.response.status === 405) {
             toast.error(methodNotAllowedMessage, {
               className:

@@ -49,10 +49,12 @@
     "failed_to_update": "Failed to updated",
     "successfully_created!":"Successfully created!",
     "successfully_updated!":"Successfully updated!",
+    "successfully_Deleted!":"Successfully created!",
     "network_error": "Network Error",
     "method_not_allowed":"Method Not Allowed",
 
     "Choose a movie": "Choose a movie"
+
 
 }
 
