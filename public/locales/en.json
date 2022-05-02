@@ -26,6 +26,7 @@
     "Create":"Create",
     "Update": "Update",
     "total" : "total",
+    "image":"image",
 
     "Value is required":"Value is required",
     "The film is not selected" : "The film is not selected",
