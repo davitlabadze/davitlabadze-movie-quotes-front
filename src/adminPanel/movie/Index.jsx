@@ -124,14 +124,14 @@ function Index() {
                   <td className='w-1/4 p-4 px-6 text-center '>
                     <Link to={`/adminpanel/movies/${movie.id}/edit`}>
                       <button className='ml-4'>
-                        <PencilIcon className='w-6 h-6 dark:text-slate-600 hover:dark:text-slate-700' />
+                        <PencilIcon className='w-6 h-6 text-slate-300 hover:text-slate-500 dark:text-slate-700 hover:dark:text-slate-500' />
                       </button>
                     </Link>
                     <button
                       onClick={() => deleteMovie(movie.id)}
                       className='ml-2'
                     >
-                      <TrashIcon className='w-6 h-6 dark:text-slate-600 hover:dark:text-slate-700' />
+                      <TrashIcon className='w-6 h-6 text-slate-300 hover:text-slate-500 dark:text-slate-700 hover:dark:text-slate-500' />
                     </button>
                   </td>
                 </tr>
