@@ -93,7 +93,7 @@ function Index() {
           type='search'
           id='search'
           placeholder='Search by movie or quote'
-          className='p-2 px-12 mb-4 bg-no-repeat rounded-lg shadow-sm outline-none dark:bg-slate-800 dark:text-slate-500 bg bg-left-1 bg-search'
+          className='p-2 px-12 mb-4 bg-no-repeat rounded-lg shadow-sm outline-none dark:placeholder-gray-600 dark:bg-slate-800 dark:text-slate-500 bg bg-left-1 bg-search'
         />
       </div>
       <div>
