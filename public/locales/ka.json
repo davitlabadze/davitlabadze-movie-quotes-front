@@ -29,6 +29,7 @@
 
     "Value is required":"ველი ცარიელია",
     "The film is not selected" : "ფილმი არ არის არჩეული",
+    "No_image_chosen" : "სურათი არ არის არჩეული",
 
     "The page you're looking for doesn't exist":"გვერდი, რომელსაც ეძებთ, არ არსებობს",
     "Oops!":"უი!",
@@ -41,7 +42,7 @@
     "Movie_ka":"ფილმის სახელი ქართულად",
     "Quote_en":"ციტატა ინგლისურად",
     "Quote_ka":"ციტატა ქართულად",
-    "image":"სურათი",
+    "choose_image":"აირჩიეთ სურათი",
     "action": "განახლება/წაშლა",
 
     "Choose a movie": "აირჩიე ფილმი"

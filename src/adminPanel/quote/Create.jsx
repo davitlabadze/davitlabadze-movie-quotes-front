@@ -21,6 +21,27 @@ function Create() {
   } = useForm();
 
   const [movies, setMovie] = useState([]);
+  const [movieQuoteImg, setMovieQuoteImg] = useState('');
+
+  const emptyValue = `${t('Value is required')}`;
+  const emptySelect = `${t('The film is not selected')}`;
+  const emptyImage = `${t('No_image_chosen')}`;
+
+  const imageHandler = (e) => {
+    if (e) {
+      const File = e[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setMovieQuoteImg(reader.result);
+        }
+      };
+
+      if (File) {
+        reader.readAsDataURL(File);
+      }
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -54,20 +75,6 @@ function Create() {
     }
   };
 
-  const [movieQuoteImg, setMovieQuoteImg] = useState(
-    'https://www.dggb.org/wp-content/uploads/2020/09/British-film-and-television-directors-1.jpg'
-  );
-
-  const imageHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setMovieQuoteImg(reader.result);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
   const createQuote = async (data) => {
     try {
       const formData = new FormData();
@@ -87,8 +94,6 @@ function Create() {
       console.error(err);
     }
   };
-  const emptyValue = `${t('Value is required')}`;
-  const emptySelect = `${t('The film is not selected')}`;
 
   return (
     <div>
@@ -127,7 +132,6 @@ function Create() {
             </p>
           )}
         </div>
-
         <div className='mb-6'>
           <label
             className='block mb-2 text-xs font-bold text-gray-700 uppercase'
@@ -190,57 +194,48 @@ function Create() {
           )}
         </div>
 
-        <div className='mb-4'>
-          <div className='max-w-md overflow-hidden rounded-lg md:max-w-xl '>
-            <div className='md:flex '>
-              <div className='w-full '>
-                <div className='relative flex items-center justify-center h-48 border-2 border-gray-500 border-dashed rounded-lg dark:border-slate-600 '>
-                  <div className='absolute '>
-                    <div className='flex flex-col items-center '>
-                      <span className='block font-normal text-gray-400 '>
-                        Attach you files here
-                      </span>
-                    </div>
-                  </div>
-
+        <div className='mb-6'>
+          <div className='overflow-hidden rounded-lg md:max-w-xl'>
+            <div className=' md:flex'>
+              <div className='w-full'>
+                <div
+                  className={`relative flex items-center justify-center h-48 border  border-dashed rounded-lg ${
+                    errors.image ? 'border-red-500' : 'border-gray-500'
+                  }`}
+                >
+                  <label
+                    className='absolute mb-2 text-xl font-bold text-gray-700 uppercase'
+                    htmlFor='image'
+                  >
+                    {!errors.image && <p>{t('choose_image')}</p>}
+                    {errors.image && (
+                      <p className='text-red-500'>{errors.image.message}</p>
+                    )}
+                  </label>
                   <input
                     type='file'
-                    className='w-full h-full opacity-0 cursor-pointer '
+                    className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
                     name='image'
                     accept='image/*'
-                    onChange={imageHandler}
-                    // onChange={imageHandler(watch('image'))}
-                    // {...register('image', { required: emptySelect })}
+                    onChange={imageHandler(watch('image'))}
+                    {...register('image', { required: emptyImage })}
                   />
+
+                  <div className='z-10 w-auto h-auto'>
+                    {movieQuoteImg && (
+                      <img
+                        className='w-full h-full'
+                        src={movieQuoteImg}
+                        alt='imageFile'
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {movieQuoteImg && (
-          <img
-            className='w-auto h-auto cursor-pointer '
-            src={movieQuoteImg}
-            alt=''
-          />
-        )}
-        {/* <div className='mb-6'>
-          <label
-            className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-            htmlFor='image'
-          >
-            {t('image')}
-          </label>
-          <input
-            className='block  dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding  cursor-pointer focus:text-gray-700 focus:bg-red-900 focus:border-blue-600 focus:outline-none'
-            type='file'
-            name='image'
-            {...register('image', { required: emptySelect })}
-          />
-          {errors.image && (
-            <p className='mt-2 text-xs text-red-500'>{errors.image.message}</p>
-          )}
-        </div> */}
+
         <div className='flex mb-6 w-min'>
           <div className='flex mb-6 w-min'>
             <Button flash={message} title='Create' />

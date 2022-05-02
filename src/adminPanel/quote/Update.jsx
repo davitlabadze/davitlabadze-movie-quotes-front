@@ -17,11 +17,33 @@ function Update() {
   const [message, setMessage] = useState('');
   const [movies, setMovie] = useState([]);
   const [defImage, setDefImage] = useState('');
+  const [movieQuoteImg, setMovieQuoteImg] = useState('');
+
+  const emptyValueMessage = `${t('Value is required')}`;
+  const emptySelectMessage = `${t('The film is not selected')}`;
+  const emptyImageMessage = `${t('No_image_chosen')}`;
+
+  const imageHandler = (e) => {
+    if (e) {
+      const File = e[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setMovieQuoteImg(reader.result);
+        }
+      };
+
+      if (File) {
+        reader.readAsDataURL(File);
+      }
+    }
+  };
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -34,7 +56,6 @@ function Update() {
         .get(`quotes/${params.quoteId}/edit`)
         .then((res) => {
           setQuote(res.data);
-          console.log(res.data.quote.thumbnail);
           setDefImage(res.data.quote.thumbnail);
           setID(res.data.quote.id);
           setValue('quoteEn', res.data.quote.quote.en);
@@ -76,9 +97,6 @@ function Update() {
       throw new Error('Error');
     }
   };
-
-  const emptyValueMessage = `${t('Value is required')}`;
-  const emptySelectMessage = `${t('The film is not selected')}`;
 
   return (
     <Fragment>
@@ -184,26 +202,41 @@ function Update() {
                 </p>
               )}
             </div>
-            <div className='flex mb-6'>
-              <div>
-                <label
-                  className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-                  htmlFor='text'
-                >
-                  {t('image')}
-                </label>
-                <input
-                  className='block px-3 m-0 text-base font-normal py-1.5 text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded  form-control bg-clip-padding focus:text-gray-700 focus:bg-white   dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 focus:border-blue-600 focus:outline-none'
-                  type='file'
-                  name='image'
-                  {...register('image')}
-                />
+
+            <div className='mb-6'>
+              <div className='overflow-hidden rounded-lg md:max-w-xl'>
+                <div className=' md:flex'>
+                  <div className='w-full'>
+                    <div className='relative flex items-center justify-center h-48 border border-gray-500 border-dashed rounded-lg'>
+                      <input
+                        type='file'
+                        className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
+                        name='image'
+                        accept='image/*'
+                        onChange={imageHandler(watch('image'))}
+                        {...register('image', { required: emptyImageMessage })}
+                      />
+
+                      <div className='z-10 w-auto h-auto'>
+                        {movieQuoteImg && (
+                          <img
+                            className='w-full h-full'
+                            src={movieQuoteImg}
+                            alt='imageFile'
+                          />
+                        )}
+                        {!movieQuoteImg && (
+                          <img
+                            src={`${process.env.REACT_APP_ENV_IMAGE}${defImage}`}
+                            alt='default'
+                            className='w-full h-full'
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <img
-                src={`${process.env.REACT_APP_ENV_IMAGE}${defImage}`}
-                alt='default'
-                className='w-20 h-auto ml-10 rounded-lg'
-              />
             </div>
             <div className='flex mb-6 w-min'>
               <div className='flex mb-6 w-min'>

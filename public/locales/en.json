@@ -29,6 +29,7 @@
 
     "Value is required":"Value is required",
     "The film is not selected" : "The film is not selected",
+    "No_image_chosen" : "No image chosen",
 
     "The page you're looking for doesn't exist":"The page you're looking for doesn't exist",
     "Oops!":"Oops!",
@@ -41,7 +42,7 @@
     "Movie_ka":"Movie title in Georgia",
     "Quote_en":"Quote in English",
     "Quote_ka":"Quote in Georgia",
-    "image":"image",
+    "choose_image":"choose image",
     "action": "action",
 
     "Choose a movie": "Choose a movie"
