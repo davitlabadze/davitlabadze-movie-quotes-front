@@ -16,7 +16,7 @@ const DashboardTable = (props) => {
       </div>
       <table className='w-full text-center divide-y divide-gray-200 rounded-lg shadow-md dark:divide-slate-700 '>
         <TableThead
-          title={[
+          titles={[
             `${t('id')}`,
             `${t('Movie_en')}`,
             `${t('Movie_ka')}`,
