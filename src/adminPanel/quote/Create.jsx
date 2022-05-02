@@ -7,6 +7,8 @@ import Button from 'components/adminPanelComponents/Button';
 import Title from 'components/Title';
 import { EyeIcon, TableIcon } from '@heroicons/react/outline';
 import Nameless from 'components/adminPanelComponents/Nameless';
+import toast, { Toaster } from 'react-hot-toast';
+
 function Create() {
   Title('Quote | Create');
   const [message, setMessage] = useState('');
@@ -22,10 +24,13 @@ function Create() {
 
   const [movies, setMovie] = useState([]);
   const [movieQuoteImg, setMovieQuoteImg] = useState('');
-
-  const emptyValue = `${t('Value is required')}`;
-  const emptySelect = `${t('The film is not selected')}`;
-  const emptyImage = `${t('No_image_chosen')}`;
+  const errorMessage = `${t('failed_to_create')}`;
+  const successfullyMessage = `${t('successfully_created!')}`;
+  const networkErrorMessage = `${t('network_error')}`;
+  const methodNotAllowedMessage = `${t('method_not_allowed')}`;
+  const emptyValueMessage = `${t('Value is required')}`;
+  const emptySelectMessage = `${t('The film is not selected')}`;
+  const emptyImageMessage = `${t('No_image_chosen')}`;
 
   const imageHandler = (e) => {
     if (e) {
@@ -44,19 +49,16 @@ function Create() {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (formState.isSubmitSuccessful) {
-        setMessage('');
-        reset({
-          quoteEn: '',
-          quoteKa: '',
-          movieId: '',
-          image: '',
-        });
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [message, formState, reset]);
+    if (formState.isSubmitSuccessful) {
+      setMessage('');
+      reset({
+        quoteEn: '',
+        quoteKa: '',
+        movieId: '',
+        image: '',
+      });
+    }
+  }, [formState, reset]);
 
   useEffect(() => {
     getMovie();
@@ -86,17 +88,35 @@ function Create() {
       await axios
         .post('quotes/create', formData)
         .then((res) => {
-          console.log(data);
-          setMessage('successfully!');
+          toast.success(successfullyMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.status === 405) {
+            toast.error(methodNotAllowedMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          } else {
+            toast.error(errorMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          }
+        });
     } catch (err) {
-      console.error(err);
+      toast.error(networkErrorMessage, {
+        className: 'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+      });
     }
   };
 
   return (
     <div>
+      <Toaster />
       <Nameless
         icon={<TableIcon />}
         btnIcon={<EyeIcon />}
@@ -124,7 +144,7 @@ function Create() {
             type='text'
             name='quote-en'
             id='quote-en'
-            {...register('quoteEn', { required: emptyValue })}
+            {...register('quoteEn', { required: emptyValueMessage })}
           />
           {errors.quoteEn && (
             <p className='mt-2 text-xs text-red-500'>
@@ -146,7 +166,7 @@ function Create() {
             type='text'
             name='quote-ka'
             id='quote-ka'
-            {...register('quoteKa', { required: emptyValue })}
+            {...register('quoteKa', { required: emptyValueMessage })}
           />
           {errors.quoteKa && (
             <p className='mt-2 text-xs text-red-500'>
@@ -178,7 +198,7 @@ function Create() {
           focus:outline-none'
             aria-label='Default select example'
             name='movie_id'
-            {...register('movieId', { required: emptySelect })}
+            {...register('movieId', { required: emptySelectMessage })}
           >
             {movies.map((movie) => (
               <option value={movie.id} key={movie.id}>
@@ -218,7 +238,7 @@ function Create() {
                     name='image'
                     accept='image/*'
                     onChange={imageHandler(watch('image'))}
-                    {...register('image', { required: emptyImage })}
+                    {...register('image', { required: emptyImageMessage })}
                   />
 
                   <div className='z-10 w-auto h-auto'>

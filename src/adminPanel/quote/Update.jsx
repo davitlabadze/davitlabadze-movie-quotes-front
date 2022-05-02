@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -8,20 +7,23 @@ import Button from 'components/adminPanelComponents/Button';
 import Title from 'components/Title';
 import Nameless from 'components/adminPanelComponents/Nameless';
 import { EyeIcon, TableIcon } from '@heroicons/react/outline';
+import toast, { Toaster } from 'react-hot-toast';
+
 function Update() {
   Title('Quote | Update');
   const { t } = useTranslation();
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quote, setQuote] = useState();
-  const [message, setMessage] = useState('');
   const [movies, setMovie] = useState([]);
   const [defImage, setDefImage] = useState('');
   const [movieQuoteImg, setMovieQuoteImg] = useState('');
-
   const emptyValueMessage = `${t('Value is required')}`;
   const emptySelectMessage = `${t('The film is not selected')}`;
-  const emptyImageMessage = `${t('No_image_chosen')}`;
+  const errorMessage = `${t('failed_to_update')}`;
+  const successfullyMessage = `${t('successfully_updated!')}`;
+  const networkErrorMessage = `${t('network_error')}`;
+  const methodNotAllowedMessage = `${t('method_not_allowed')}`;
 
   const imageHandler = (e) => {
     if (e) {
@@ -71,11 +73,7 @@ function Update() {
 
   useEffect(() => {
     getQuote();
-    const timer = setTimeout(() => {
-      setMessage('');
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [message, getQuote]);
+  }, [getQuote]);
 
   const updateQuote = async (data) => {
     const formData = new FormData();
@@ -91,15 +89,35 @@ function Update() {
         data: formData,
         method: 'POST',
       })
-        .then(() => setMessage('successfully!'))
-        .catch((err) => console.log(err));
-    } catch (error) {
-      throw new Error('Error');
+        .then((res) => {
+          toast.success(successfullyMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
+        })
+        .catch((error) => {
+          if (error.response.status === 405) {
+            toast.error(methodNotAllowedMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          } else {
+            toast.error(errorMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          }
+        });
+    } catch (err) {
+      toast.error(networkErrorMessage, {
+        className: 'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+      });
     }
   };
 
   return (
     <Fragment>
+      <Toaster />
       {!isLoading && quote && (
         <div>
           <Nameless
@@ -202,7 +220,6 @@ function Update() {
                 </p>
               )}
             </div>
-
             <div className='mb-6'>
               <div className='overflow-hidden rounded-lg md:max-w-xl'>
                 <div className=' md:flex'>
@@ -214,9 +231,8 @@ function Update() {
                         name='image'
                         accept='image/*'
                         onChange={imageHandler(watch('image'))}
-                        {...register('image', { required: emptyImageMessage })}
+                        {...register('image')}
                       />
-
                       <div className='z-10 w-auto h-auto'>
                         {movieQuoteImg && (
                           <img
@@ -240,8 +256,7 @@ function Update() {
             </div>
             <div className='flex mb-6 w-min'>
               <div className='flex mb-6 w-min'>
-                <Button flash={message} title='Update' />
-                <FlashMessage flash={message} />
+                <Button title='Update' />
               </div>
             </div>
           </form>

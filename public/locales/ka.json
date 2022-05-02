@@ -45,7 +45,13 @@
     "choose_image":"აირჩიეთ სურათი",
     "action": "განახლება/წაშლა",
 
-    "Choose a movie": "აირჩიე ფილმი"
+    "failed_to_create": "დამატება ვერ მოხერხდა",
+    "failed_to_update": "განახლება ვერ მოხერხდა",
+    "successfully_created!":"წარმატებით დაემატა!",
+    "successfully_updated!":"წარმტებით განახლდა!",
+    "Choose a movie": "აირჩიე ფილმი",
+    "network_error":"ქსელის შეცდომა",
+    "method_not_allowed":"მეთოდი დაუშვებელია"
 
 }
 

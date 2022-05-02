@@ -2,19 +2,18 @@ import React, { useEffect, useState, Fragment, useCallback } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import { TableIcon, EyeIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
 import Title from 'components/Title';
 import Nameless from 'components/adminPanelComponents/Nameless';
+import toast, { Toaster } from 'react-hot-toast';
 function Update() {
   Title('Movie | Update');
   const { t } = useTranslation();
   const [id, setID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [movie, setMovie] = useState();
-  const [message, setMessage] = useState('');
 
   const {
     register,
@@ -24,6 +23,11 @@ function Update() {
   } = useForm();
 
   const params = useParams();
+  const errorMessage = `${t('failed_to_update')}`;
+  const successfullyMessage = `${t('successfully_updated!')}`;
+  const networkErrorMessage = `${t('network_error')}`;
+  const methodNotAllowedMessage = `${t('method_not_allowed')}`;
+  const emptyValueMessage = `${t('Value is required')}`;
 
   const getMovie = useCallback(async () => {
     setIsLoading(true);
@@ -42,11 +46,7 @@ function Update() {
 
   useEffect(() => {
     getMovie();
-    const timer = setTimeout(() => {
-      setMessage('');
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [message, getMovie]);
+  }, [getMovie]);
 
   const updateMovie = async (data) => {
     const formData = new FormData();
@@ -58,18 +58,37 @@ function Update() {
         data: formData,
         method: 'POST',
       })
-        .then((res) => {
-          setMessage('successfully!');
+        .then(() => {
+          toast.success(successfullyMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.status === 405) {
+            toast.error(methodNotAllowedMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          } else {
+            toast.error(errorMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          }
+        });
     } catch (err) {
+      toast.error(networkErrorMessage, {
+        className: 'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+      });
       console.error(err);
     }
   };
 
-  const emptyValueMessage = `${t('Value is required')}`;
   return (
     <Fragment>
+      <Toaster />
       {!isLoading && movie && (
         <div>
           <Nameless
@@ -128,8 +147,7 @@ function Update() {
               )}
             </div>
             <div className='flex mb-6 w-min'>
-              <Button flash={message} title='Update' />
-              <FlashMessage flash={message} />
+              <Button title='Update' />
             </div>
           </form>
         </div>

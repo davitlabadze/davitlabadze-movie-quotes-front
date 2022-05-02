@@ -1,16 +1,16 @@
 import { TableIcon, EyeIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'components/adminPanelComponents/Button';
-import FlashMessage from 'components/adminPanelComponents/FlashMessage';
 import Title from 'components/Title';
 import Nameless from 'components/adminPanelComponents/Nameless';
+import toast, { Toaster } from 'react-hot-toast';
+
 function Create() {
   Title('Movie | Create');
   const { t } = useTranslation();
-  const [message, setMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -20,17 +20,19 @@ function Create() {
   } = useForm();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (formState.isSubmitSuccessful) {
-        setMessage('');
-        reset({
-          movieEn: '',
-          movieKa: '',
-        });
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [message, formState, reset]);
+    if (formState.isSubmitSuccessful) {
+      reset({
+        movieEn: '',
+        movieKa: '',
+      });
+    }
+  }, [formState, reset]);
+
+  const errorMessage = `${t('failed_to_create')}`;
+  const successfullyMessage = `${t('successfully_created!')}`;
+  const networkErrorMessage = `${t('network_error')}`;
+  const methodNotAllowedMessage = `${t('method_not_allowed')}`;
+  const emptyValueMessage = `${t('Value is required')}`;
 
   const createMovie = async (data) => {
     try {
@@ -39,18 +41,36 @@ function Create() {
       formData.append('movie[ka]', data.movieKa);
       await axios
         .post('movies/create', formData)
-        .then((res) => {
-          setMessage('successfully!');
+        .then(() => {
+          toast.success(successfullyMessage, {
+            className:
+              'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+          });
         })
-        .catch(() => setMessage('error'));
+        .catch((error) => {
+          console.log(error.response);
+          if (error.response.status === 405) {
+            toast.error(methodNotAllowedMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          } else {
+            toast.error(errorMessage, {
+              className:
+                'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+            });
+          }
+        });
     } catch (err) {
-      console.error(err);
+      toast.error(networkErrorMessage, {
+        className: 'bg-gray-50 shadow-lg dark:bg-slate-900 dark:text-slate-500',
+      });
     }
   };
 
-  const emptyValue = `${t('Value is required')}`;
   return (
     <div>
+      <Toaster />
       <Nameless
         icon={<TableIcon />}
         btnIcon={<EyeIcon />}
@@ -73,7 +93,7 @@ function Create() {
             type='text'
             name='movie-en'
             id='movie-en'
-            {...register('movieEn', { required: emptyValue })}
+            {...register('movieEn', { required: emptyValueMessage })}
           />
           {errors.movieEn && (
             <p className='mt-2 text-xs text-red-500'>
@@ -96,7 +116,7 @@ function Create() {
             type='text'
             name='movie-ka'
             id='movie-ka'
-            {...register('movieKa', { required: emptyValue })}
+            {...register('movieKa', { required: emptyValueMessage })}
           />
           {errors.movieKa && (
             <p className='mt-2 text-xs text-red-500'>
@@ -105,8 +125,7 @@ function Create() {
           )}
         </div>
         <div className='flex mb-6 w-min'>
-          <Button flash={message} title='Create' />
-          <FlashMessage flash={message} />
+          <Button title='Create' />
         </div>
       </form>
     </div>
