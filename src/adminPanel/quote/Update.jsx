@@ -8,6 +8,7 @@ import Title from 'components/Title';
 import Nameless from 'components/adminPanelComponents/Nameless';
 import { EyeIcon, TableIcon } from '@heroicons/react/outline';
 import toast, { Toaster } from 'react-hot-toast';
+import i18n from 'language/i18next';
 
 function Update() {
   Title('Quote | Update');
@@ -210,7 +211,7 @@ function Update() {
               >
                 {movies.map((movie) => (
                   <option value={movie.id} key={movie.id}>
-                    {movie.movie.en}
+                    {movie.movie[i18n.language]}
                   </option>
                 ))}
               </select>

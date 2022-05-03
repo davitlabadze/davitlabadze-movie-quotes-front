@@ -7,6 +7,7 @@ import Title from 'components/Title';
 import { EyeIcon, TableIcon } from '@heroicons/react/outline';
 import Nameless from 'components/adminPanelComponents/Nameless';
 import toast, { Toaster } from 'react-hot-toast';
+import i18n from 'i18next';
 
 function Create() {
   Title('Quote | Create');
@@ -200,7 +201,7 @@ function Create() {
           >
             {movies.map((movie) => (
               <option value={movie.id} key={movie.id}>
-                {movie.movie.en}
+                {movie.movie[i18n.language]}
               </option>
             ))}
           </select>
