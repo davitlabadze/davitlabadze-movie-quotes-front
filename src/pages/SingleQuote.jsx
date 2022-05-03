@@ -41,9 +41,9 @@ function SingleQuote() {
       {!isLoading && quote && (
         <div className='flex justify-center py-32'>
           <div className='rounded-lg'>
-            <div className='h-96'>
+            <div className='flex justify-center h-96'>
               <img
-                className='object-cover w-full h-full rounded-lg'
+                className='object-cover h-full rounded-lg'
                 src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
                 alt='logo'
               />

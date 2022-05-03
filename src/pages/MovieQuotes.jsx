@@ -41,17 +41,17 @@ function Card() {
           <Header title={quotes.movie[i18n.language]} />
           {quotes.quotes.map((quote) => (
             <div className='flex justify-center mt-14' key={quote.id}>
-              <div className='bg-white rounded-lg '>
-                <div className=' h-96'>
-                  <img
-                    className='object-cover w-full h-full rounded'
-                    src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
-                    alt='img'
-                  />
+              <div className='max-w-4xl shadow-lg'>
+                <img
+                  className='w-full rounded-t-lg '
+                  src={`${process.env.REACT_APP_ENV_IMAGE}${quote.thumbnail}`}
+                  alt='Sunset in the mountains'
+                />
+                <div className='px-6 py-4 bg-white rounded-b-lg'>
+                  <div className='mb-2 text-xl font-bold text-center'>
+                    {quote.quote[i18n.language]}
+                  </div>
                 </div>
-                <h1 className='py-16 text-5xl text-center text-black'>
-                  {quote.quote[i18n.language]}
-                </h1>
               </div>
             </div>
           ))}
