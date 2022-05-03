@@ -85,7 +85,7 @@ function Create() {
       formData.append('thumbnail', data.image[0]);
 
       await axios
-        .post('quotes/create', formData)
+        .post('quotes/store', formData)
         .then((res) => {
           toast.success(successfullyMessage, {
             className:
