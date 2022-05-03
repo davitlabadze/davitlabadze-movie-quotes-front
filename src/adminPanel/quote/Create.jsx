@@ -22,6 +22,7 @@ function Create() {
 
   const [movies, setMovie] = useState([]);
   const [movieQuoteImg, setMovieQuoteImg] = useState('');
+
   const errorMessage = `${t('failed_to_create')}`;
   const successfullyMessage = `${t('successfully_created!')}`;
   const networkErrorMessage = `${t('network_error')}`;
@@ -32,8 +33,6 @@ function Create() {
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
-      const div = document.getElementById('filereaderimage');
-      div.remove();
       reset({
         quoteEn: '',
         quoteKa: '',
