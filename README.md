@@ -55,6 +55,10 @@ Run the command
 ```bash 
 npm install
 ```
+Run the command
+```bash
+cp .env.example .env
+```
 Run the command 
 ```bash
 npm start
