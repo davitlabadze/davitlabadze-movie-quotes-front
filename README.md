@@ -15,8 +15,11 @@
 Movie Quotes is a website where you can browse the website and view a random movie quote. Also go to the random movie page and see the famous quote from this movie. The website has a multilingual function, it is English and Georgian.
 
 ## App looks like 
-!['screenshot'](appscreen/screen1.png)
----
+!['screenshot'](readme/screen1.png)
+!['adminpanel-light'](readme/adminpanel-light.png)
+!['adminpanel-dark'](readme/adminpanel-dark.png)
+
+
 <a name="pre"></a>
 
   
@@ -46,7 +49,7 @@ Movie Quotes is a website where you can browse the website and view a random mov
 
 Downoad [ZIP](https://github.com/RedberryInternship/davitlabadze-movie-quotes-front/archive/refs/heads/main.zip) or Clone:
  ```bash 
-https://github.com/davitlabadze/davitlabadze-movie-quotes-front
+git clone https://github.com/davitlabadze/davitlabadze-movie-quotes-front
 ```
 
 
