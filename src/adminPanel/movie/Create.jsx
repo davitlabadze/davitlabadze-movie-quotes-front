@@ -37,8 +37,8 @@ function Create() {
   const createMovie = async (data) => {
     try {
       const formData = new FormData();
-      formData.append('movie[en]', data.movieEn);
-      formData.append('movie[ka]', data.movieKa);
+      formData.append('movie_en', data.movieEn);
+      formData.append('movie_ka', data.movieKa);
       await axios
         .post('movies/create', formData)
         .then(() => {
@@ -86,9 +86,8 @@ function Create() {
             {t('Movie_en')}
           </label>
           <input
-            className={`w-full p-2 border dark:border-slate-700 border-gray-400 dark:bg-slate-800 dark:text-slate-600 rounded outline-none ${
-              errors.movieEn && 'w-full p-2 border-2 border-red-700 rounded'
-            }`}
+            className={`w-full p-2 border dark:border-slate-700 border-gray-400 dark:bg-slate-800 dark:text-slate-600 rounded outline-none ${errors.movieEn} && 'w-full p-2 border-2 border-red-700 rounded'
+              }`}
             type='text'
             name='movie-en'
             id='movie-en'
@@ -109,9 +108,8 @@ function Create() {
             {t('Movie_ka')}
           </label>
           <input
-            className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
-              errors.movieKa && 'w-full p-2 border-2 border-red-700 rounded'
-            }`}
+            className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${errors.movieKa} && 'w-full p-2 border-2 border-red-700 rounded'
+              }`}
             type='text'
             name='movie-ka'
             id='movie-ka'
