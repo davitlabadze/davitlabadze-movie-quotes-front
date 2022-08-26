@@ -83,8 +83,8 @@ function Update() {
       formData.append('thumbnail', data.image[0]);
     }
     formData.append('movie_id', data.movieId);
-    formData.append('quote[en]', data.quoteEn);
-    formData.append('quote[ka]', data.quoteKa);
+    formData.append('quote_en', data.quoteEn);
+    formData.append('quote_ka', data.quoteKa);
     try {
       await axios(`quotes/${id}/update`, {
         data: formData,
@@ -131,62 +131,97 @@ function Update() {
           <form
             method='POST'
             onSubmit={handleSubmit(updateQuote)}
-            className='mt-10'
+            className='flex mt-10'
           >
-            <div className='mb-6'>
-              <label
-                className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-                htmlFor='quote-en'
-              >
-                {t('Quote_en')}
-              </label>
-              <input
-                className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
-                  errors.quoteEn && 'w-full p-2 border-2 border-red-700 rounded'
-                }`}
-                type='text'
-                name='quote-en'
-                id='quote-en'
-                {...register('quoteEn', {
-                  required: emptyValueMessage,
-                })}
-              />
-              {errors.quoteEn && (
-                <p className='mt-2 text-xs text-red-500'>
-                  {errors.quoteEn.message}
-                </p>
-              )}
+            <div className='w-1/2 overflow-hidden rounded-lg md:max-w-xl'>
+              <div className='mb-6'>
+                <div className='overflow-hidden rounded-lg md:max-w-xl'>
+                  <div className=' md:flex'>
+                    <div className='w-full'>
+                      <div className='relative flex items-center justify-center border border-gray-500 border-dashed rounded-lg h-96'>
+                        <input
+                          type='file'
+                          className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
+                          name='image'
+                          accept='image/*'
+                          onChange={imageHandler(watch('image'))}
+                          {...register('image')}
+                        />
+                        <div className='z-10 w-auto h-auto'>
+                          {movieQuoteImg && (
+                            <img
+                              className='w-full h-full'
+                              src={movieQuoteImg}
+                              alt='imageFile'
+                            />
+                          )}
+                          {!movieQuoteImg && (
+                            <img
+                              src={`${process.env.REACT_APP_ENV_IMAGE}${defImage}`}
+                              alt='default'
+                              className='w-full h-full'
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className='mb-6'>
-              <label
-                className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-                htmlFor='quote-ka'
-              >
-                {t('Quote_ka')}
+            <div className='w-1/2 ml-10'>
+              <div className='mb-6'>
+                <label
+                  className='block mb-2 text-xs font-bold text-gray-700 uppercase'
+                  htmlFor='quote-en'
+                >
+                  {t('Quote_en')}
+                </label>
+                <input
+                  // eslint-disable-next-line prettier/prettier
+                  className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${errors.quoteEn && 'w-full p-2 border-2 border-red-700 rounded'}`}
+                  type='text'
+                  name='quote-en'
+                  id='quote-en'
+                  {...register('quoteEn', {
+                    required: emptyValueMessage,
+                  })}
+                />
+                {errors.quoteEn && (
+                  <p className='mt-2 text-xs text-red-500'>
+                    {errors.quoteEn.message}
+                  </p>
+                )}
+              </div>
+              <div className='mb-6'>
+                <label
+                  className='block mb-2 text-xs font-bold text-gray-700 uppercase'
+                  htmlFor='quote-ka'
+                >
+                  {t('Quote_ka')}
+                </label>
+                <input
+                  // eslint-disable-next-line prettier/prettier
+                  className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${errors.quoteKa && 'w-full p-2 border-2 border-red-700 rounded'}`}
+                  type='text'
+                  name='quote-ka'
+                  id='quote-ka'
+                  {...register('quoteKa', { required: emptyValueMessage })}
+                />
+
+                {errors.quoteKa && (
+                  <p className='mt-2 text-xs text-red-500'>
+                    {errors.quoteKa.message}
+                  </p>
+                )}
+              </div>
+              <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
+                {t('Choose a movie')}
               </label>
-              <input
-                className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
-                  errors.quoteKa && 'w-full p-2 border-2 border-red-700 rounded'
-                }`}
-                type='text'
-                name='quote-ka'
-                id='quote-ka'
-                {...register('quoteKa', { required: emptyValueMessage })}
-              />
 
-              {errors.quoteKa && (
-                <p className='mt-2 text-xs text-red-500'>
-                  {errors.quoteKa.message}
-                </p>
-              )}
-            </div>
-            <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
-              {t('Choose a movie')}
-            </label>
-
-            <div className='mb-6'>
-              <select
-                className='  dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700
+              <div className='mb-6'>
+                <select
+                  className='  dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700
                form-select 
                block 
                px-3 
@@ -203,61 +238,29 @@ function Update() {
              focus:bg-white 
              focus:border-blue-600 
              focus:outline-none'
-                aria-label='Default select example'
-                name='movie-id'
-                {...register('movieId', {
-                  required: emptySelectMessage,
-                })}
-              >
-                {movies.map((movie) => (
-                  <option value={movie.id} key={movie.id}>
-                    {movie.movie[i18n.language]}
-                  </option>
-                ))}
-              </select>
-              {errors.movieId && (
-                <p className='mt-2 text-xs text-red-500'>
-                  {errors.movieId.message}
-                </p>
-              )}
-            </div>
-            <div className='mb-6'>
-              <div className='overflow-hidden rounded-lg md:max-w-xl'>
-                <div className=' md:flex'>
-                  <div className='w-full'>
-                    <div className='relative flex items-center justify-center h-48 border border-gray-500 border-dashed rounded-lg'>
-                      <input
-                        type='file'
-                        className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
-                        name='image'
-                        accept='image/*'
-                        onChange={imageHandler(watch('image'))}
-                        {...register('image')}
-                      />
-                      <div className='z-10 w-auto h-auto'>
-                        {movieQuoteImg && (
-                          <img
-                            className='w-full h-full'
-                            src={movieQuoteImg}
-                            alt='imageFile'
-                          />
-                        )}
-                        {!movieQuoteImg && (
-                          <img
-                            src={`${process.env.REACT_APP_ENV_IMAGE}${defImage}`}
-                            alt='default'
-                            className='w-full h-full'
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  aria-label='Default select example'
+                  name='movie-id'
+                  {...register('movieId', {
+                    required: emptySelectMessage,
+                  })}
+                >
+                  {movies.map((movie) => (
+                    <option value={movie.id} key={movie.id}>
+                      {movie.movie[i18n.language]}
+                    </option>
+                  ))}
+                </select>
+                {errors.movieId && (
+                  <p className='mt-2 text-xs text-red-500'>
+                    {errors.movieId.message}
+                  </p>
+                )}
               </div>
-            </div>
-            <div className='flex mb-6 w-min'>
+
               <div className='flex mb-6 w-min'>
-                <Button title='Update' />
+                <div className='flex mb-6 w-min'>
+                  <Button title='Update' />
+                </div>
               </div>
             </div>
           </form>
