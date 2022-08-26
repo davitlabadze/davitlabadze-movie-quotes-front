@@ -79,8 +79,8 @@ function Create() {
   const createQuote = async (data) => {
     try {
       const formData = new FormData();
-      formData.append('quote[en]', data.quoteEn);
-      formData.append('quote[ka]', data.quoteKa);
+      formData.append('quote_en', data.quoteEn);
+      formData.append('quote_ka', data.quoteKa);
       formData.append('movie_id', data.movieId);
       formData.append('thumbnail', data.image[0]);
 
@@ -126,138 +126,125 @@ function Create() {
       <form
         onSubmit={handleSubmit(createQuote)}
         method='POST'
-        className='mt-10'
+        className='flex mt-10'
         encType='multipart/form-data'
       >
-        <div className='mb-6'>
-          <label
-            className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-            htmlFor='quote-en'
-          >
-            {t('Quote_en')}
-          </label>
-          <input
-            className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
-              errors.quoteEn && 'w-full p-2 border-2 border-red-700 rounded'
-            }`}
-            type='text'
-            name='quote-en'
-            id='quote-en'
-            {...register('quoteEn', { required: emptyValueMessage })}
-          />
-          {errors.quoteEn && (
-            <p className='mt-2 text-xs text-red-500'>
-              {errors.quoteEn.message}
-            </p>
-          )}
-        </div>
-        <div className='mb-6'>
-          <label
-            className='block mb-2 text-xs font-bold text-gray-700 uppercase'
-            htmlFor='quote-ka'
-          >
-            {t('Quote_ka')}
-          </label>
-          <input
-            className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${
-              errors.quoteKa && 'w-full p-2 border-2 border-red-700 rounded'
-            }`}
-            type='text'
-            name='quote-ka'
-            id='quote-ka'
-            {...register('quoteKa', { required: emptyValueMessage })}
-          />
-          {errors.quoteKa && (
-            <p className='mt-2 text-xs text-red-500'>
-              {errors.quoteKa.message}
-            </p>
-          )}
-        </div>
-        <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
-          {t('Choose a movie')}
-        </label>
-        <div className='mb-6 '>
-          <select
-            className='  dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700
-            form-select 
-            block 
-            px-3 
-            py-1.5 
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding bg-no-repeat
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-          focus:text-gray-700 
-          focus:bg-white 
-          focus:border-blue-600 
-          focus:outline-none'
-            aria-label='Default select example'
-            name='movie_id'
-            {...register('movieId', { required: emptySelectMessage })}
-          >
-            {movies.map((movie) => (
-              <option value={movie.id} key={movie.id}>
-                {movie.movie[i18n.language]}
-              </option>
-            ))}
-          </select>
-
-          {errors.movieId && (
-            <p className='mt-2 text-xs text-red-500'>
-              {errors.movieId.message}
-            </p>
-          )}
-        </div>
-
-        <div className='mb-6'>
-          <div className='overflow-hidden rounded-lg md:max-w-xl'>
-            <div className=' md:flex'>
-              <div className='w-full'>
-                <div
-                  className={`relative flex items-center justify-center h-48 border  border-dashed rounded-lg ${
-                    errors.image ? 'border-red-500' : 'border-gray-500'
-                  }`}
-                >
-                  <label
-                    className='absolute mb-2 text-xl font-bold text-gray-700 uppercase'
-                    htmlFor='image'
+        <div className='w-1/2 overflow-hidden rounded-lg md:max-w-xl'>
+          <div className='mb-6'>
+            <div className='overflow-hidden rounded-lg md:max-w-xl'>
+              <div className=' md:flex'>
+                <div className='w-full'>
+                  <div
+                    // eslint-disable-next-line prettier/prettier
+                    className={`h-96 relative flex items-center justify-center  border  border-dashed rounded-lg ${errors.image ? 'border-red-500' : 'border-gray-500'}`}
                   >
-                    {!errors.image && <p>{t('choose_image')}</p>}
-                    {errors.image && (
-                      <p className='text-red-500'>{errors.image.message}</p>
-                    )}
-                  </label>
-                  <input
-                    type='file'
-                    className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
-                    name='image'
-                    accept='image/*'
-                    onChange={imageHandler(watch('image'))}
-                    {...register('image', { required: emptyImageMessage })}
-                  />
+                    <label
+                      className='absolute mb-2 text-xl font-bold text-gray-700 uppercase'
+                      htmlFor='image'
+                    >
+                      {!errors.image && <p>{t('choose_image')}</p>}
+                      {errors.image && (
+                        <p className='text-red-500'>{errors.image.message}</p>
+                      )}
+                    </label>
+                    <input
+                      type='file'
+                      className='absolute z-20 w-full h-full opacity-0 cursor-pointer '
+                      name='image'
+                      accept='image/*'
+                      onChange={imageHandler(watch('image'))}
+                      {...register('image', { required: emptyImageMessage })}
+                    />
 
-                  <div className='z-10 w-auto h-auto' id='filereaderimage'>
-                    {movieQuoteImg && (
-                      <img
-                        className='w-full h-full'
-                        src={movieQuoteImg}
-                        alt='imageFile'
-                      />
-                    )}
+                    <div className='z-10 w-auto h-auto' id='filereaderimage'>
+                      {movieQuoteImg && (
+                        <img
+                          className='w-full h-full'
+                          src={movieQuoteImg}
+                          alt='imageFile'
+                          accept='image/*'
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div className='w-1/2 ml-10'>
+          <div className='mb-6'>
+            <label
+              className='block mb-2 text-xs font-bold text-gray-700 uppercase'
+              htmlFor='quote-en'
+            >
+              {t('Quote_en')}
+            </label>
+            <input
+              // eslint-disable-next-line prettier/prettier
+              className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${errors.quoteEn && 'w-full p-2 border-2 border-red-700 rounded'}`}
+              type='text'
+              name='quote-en'
+              id='quote-en'
+              {...register('quoteEn', { required: emptyValueMessage })}
+            />
+            {errors.quoteEn && (
+              <p className='mt-2 text-xs text-red-500'>
+                {errors.quoteEn.message}
+              </p>
+            )}
+          </div>
+          <div className='mb-6'>
+            <label
+              className='block mb-2 text-xs font-bold text-gray-700 uppercase'
+              htmlFor='quote-ka'
+            >
+              {t('Quote_ka')}
+            </label>
+            <input
+              // eslint-disable-next-line prettier/prettier
+              className={`w-full dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 p-2 border border-gray-400 rounded outline-none ${errors.quoteKa && 'w-full p-2 border-2 border-red-700 rounded'}`}
+              type='text'
+              name='quote-ka'
+              id='quote-ka'
+              {...register('quoteKa', { required: emptyValueMessage })}
+            />
+            {errors.quoteKa && (
+              <p className='mt-2 text-xs text-red-500'>
+                {errors.quoteKa.message}
+              </p>
+            )}
+          </div>
+          <label className='block mb-2 text-xs font-bold text-gray-700 uppercase'>
+            {t('Choose a movie')}
+          </label>
+          <div className='mb-6 '>
+            <select
+              className='  dark:bg-slate-800 dark:text-slate-600 dark:border-slate-700 form-select block px-3 py-1.5 font-normal text-gray-700
+            bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700  focus:bg-white 
+          focus:border-blue-600 
+          focus:outline-none'
+              aria-label='Default select example'
+              name='movie_id'
+              {...register('movieId', { required: emptySelectMessage })}
+            >
+              {movies.map((movie) => (
+                <option value={movie.id} key={movie.id}>
+                  {movie.movie[i18n.language]}
+                </option>
+              ))}
+            </select>
 
-        <div className='flex mb-6 w-min'>
+            {errors.movieId && (
+              <p className='mt-2 text-xs text-red-500'>
+                {errors.movieId.message}
+              </p>
+            )}
+          </div>
           <div className='flex mb-6 w-min'>
-            <Button title='Create' />
+            <div className='flex mb-6 w-min'>
+              <Button title='Create' />
+            </div>
           </div>
         </div>
       </form>
